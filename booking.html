@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<title>Online Booking System</title>
+
+<form method="get" action="/html/codes/html_form_handler.cfm">
+
+  <fieldset>
+	  <p>
+		<label>When do you want to book a session for?
+		  <input type="datetime-local" name="pickup_time" required>
+		</label>
+	  </p>
+  </fieldset>
+
+  <p>
+    <label>Experience Level
+    <select name="experience">
+		<option value="beginner">Beginner</option>
+		<option value="intermediate">Intermediate</option>
+		<option value="advanced">Pro</option>
+    </label>
+  </p>
+
+  <p>
+    <label>Additional Comments
+      <textarea name="comments" maxlength="500"></textarea>
+    </label>
+  </p>
+
+  <p><button>Submit Booking</button></p>
+
+</form>
+
+<hr>
+<p><a href="/html/tags/html_form_tag.cfm">Contact us</a> <a href="/html/tutorial/html_forms.cfm">Send us money</a> <a href="/html/codes/html_form_code.cfm">About</a></p>

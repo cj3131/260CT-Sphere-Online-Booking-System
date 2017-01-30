@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<title>Online Booking System</title>
+<head>
+	<h1> Sphere Online Booking System </h1>
+</head>
+<form method="get" action="/html/codes/html_form_handler.cfm">
+  <p>
+    <label>First Name
+      <input type="text" name="customer_firstname" required>
+    </label> 
+  </p>
+  
+  <p>
+    <label>Surname Name
+      <input type="text" name="customer_surname" required>
+    </label> 
+  </p>
+
+  <p>
+    <label>Phone Number
+      <input type="tel" name="phone_number">
+    </label>
+  </p>
+
+  <p>
+    <label>Email address
+      <input type="email" name="email_address">
+    </label>
+  </p>
+
+  <fieldset>
+    <legend>Which membership do you want?</legend>
+    <p><label> <input type="radio" name="type" required value="normal"> Normal </label></p>
+    <p><label> <input type="radio" name="type" required value="loyalty"> Loyalty membership </label></p>
+  </fieldset>
+
+  <p>
+    <label>Special Requirements
+      <textarea name="comments" maxlength="500"></textarea>
+    </label>
+  </p>
+
+  <p><button>Register</button></p>
+
+</form>
+
+<hr>
+<p><a href="/html/tags/html_form_tag.cfm">Contact us</a> <a href="/html/tutorial/html_forms.cfm">Send us money</a> <a href="/html/codes/html_form_code.cfm">About</a></p>
