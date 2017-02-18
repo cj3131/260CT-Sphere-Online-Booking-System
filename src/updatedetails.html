@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<title>Online Booking System</title>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+	* {
+		box-sizing: border-box;
+	}
+	.left {
+		width: 35%;
+		float: left;
+		text-align: right;
+	}
+	</style>
+</head>
+
+<form method="get" action="/html/codes/html_form_handler.cfm">
+
+<div class= "title">
+	<h1>Update Details</h1>
+</div>
+
+<div class= "left">
+	<p>
+	<label>First Name</label>
+	<input type="text" name="customer_firstname" value="Ivo" autofocus>
+	</p>
+	<p>
+	<label>Surname</label>
+	<input type="text" name="customer_surname" value="Iliev">
+	</p>
+	<p>
+	<label>Phone Number</label>
+	<input type="number" name="phone_number" value="0886221932">
+	</p>
+	<p>
+	<label>Email address</label>
+	<input type="email" name="email_adress" value="ilievi@uni.coventry.ac.uk">
+	</p>
+	<p>
+	<label for="DoB">Date Of Birth</label>
+	<input id="DoB" type="date" value="1996-22-12" style ="width: 165px">
+	</p>
+	<p>
+	<label>New Password</label>
+	<input type="password" name="password">
+	</p>
+	<p>
+	<label>Comfirm New Password</label>
+	<input type="password" name="C_password">
+	</p>
+	<p>
+	<button>Save Details</button>
+	</p>
+</div>
+
+
+</form>
