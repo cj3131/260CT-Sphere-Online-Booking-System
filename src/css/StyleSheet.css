@@ -1,0 +1,19 @@
+﻿body {
+    background-color: pink;
+}
+
+p {
+    color:darkred;
+}
+
+h1 {
+    color:darkred;
+    font-style:italic;
+    font-size:50px;
+    text-align:center;
+}
+
+div
+{
+    background-color:pink;
+}
