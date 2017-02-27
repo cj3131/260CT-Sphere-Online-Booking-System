@@ -7,35 +7,39 @@
 		box-sizing: border-box;
 	}
 	.left {
-		width: 35%;
+		width: 45%;
 		float: left;
 		text-align: right;
 	}
 	</style>
 </head>
 
-<form method="get" action="/html/codes/html_form_handler.cfm">
+<body bgcolor="#97B6FF" text="#555555" link="#FFFFFF"><form method="get" action="/html/codes/html_form_handler.cfm">
 
 <div class= "title">
 	<h1>Update Details</h1>
+	<figure>
+	  <figcaption></figcaption>
+    </figure>
 </div>
 
 <div class= "left">
+	
 	<p>
 	<label>First Name</label>
-	<input type="text" name="customer_firstname" value="Ivo" autofocus>
+	<input type="text" name="customer_firstname" value="Ivo" autofocus style="width: 165px">
 	</p>
 	<p>
 	<label>Surname</label>
-	<input type="text" name="customer_surname" value="Iliev">
+	<input type="text" name="customer_surname" value="Iliev" style="width: 165px">
 	</p>
 	<p>
 	<label>Phone Number</label>
-	<input type="number" name="phone_number" value="0886221932">
+	<input type="number" name="phone_number" value="0886221932" style="width: 165px">
 	</p>
 	<p>
 	<label>Email address</label>
-	<input type="email" name="email_adress" value="ilievi@uni.coventry.ac.uk">
+	<input type="email" name="email_adress" value="ilievi@uni.coventry.ac.uk" style="width: 165px">
 	</p>
 	<p>
 	<label for="DoB">Date Of Birth</label>
@@ -43,16 +47,15 @@
 	</p>
 	<p>
 	<label>New Password</label>
-	<input type="password" name="password">
+	<input type="password" name="password" style="width: 165px">
 	</p>
 	<p>
 	<label>Comfirm New Password</label>
-	<input type="password" name="C_password">
+	<input type="password" name="C_password" style="width: 165px">
 	</p>
 	<p>
 	<button>Save Details</button>
 	</p>
 </div>
-
 
 </form>
