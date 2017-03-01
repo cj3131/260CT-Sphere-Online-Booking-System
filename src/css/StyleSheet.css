@@ -1,9 +1,9 @@
-﻿body {
-    background-color: pink;
+body {
+    background-color: #97B6FF;
 }
 
 p {
-    color:darkred;
+    /*color:darkred*/;
 }
 
 /*h1 {
@@ -15,7 +15,7 @@ p {
 
 div
 {
-    background-color:pink;
+    background-color:#97B6FF;
 }
 
 .navigation{
