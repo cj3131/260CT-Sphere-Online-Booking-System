@@ -66,3 +66,19 @@ li a {
     padding: 14px 16px;
     text-decoration: none;
 }
+
+.active {
+    background-color:grey;
+}
+
+ .left {
+    width: 35%;
+    float: left;
+    text-align: right;
+}
+.right {
+    width: 35%;
+    margin-left: 5%;
+    float: left;
+    text-align: right;
+}
