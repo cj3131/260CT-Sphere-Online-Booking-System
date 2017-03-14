@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "sphere_db";
+$dbname = "sphere2_db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 } 
 
 
-$sql = "CREATE DATABASE sphere_db";
+$sql = "CREATE DATABASE sphere2_db";
 
 if ($conn->query($sql) === TRUE) {
     echo "Database created successfully";
@@ -49,30 +49,33 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating table: " . $conn->error;
 }
 
-$sql = "CREATE TABLE groups (
-group_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-attendees INT(3) NOT NULL,
-user_id INT(6) UNSIGNED,
-CONSTRAINT group_user_id_fk FOREIGN KEY (user_id)
-REFERENCES members(user_id)
+$sql = "CREATE TABLE sessions (
+session_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+date DATE NOT NULL,
+time TIME NOT NULL
 )";
 if ($conn->query($sql) === TRUE) {
-    echo "Table groups created successfully";
+    echo "Table sessions created successfully";
 } else {
     echo "Error creating table: " . $conn->error;
 }
 
 
-$sql = "CREATE TABLE sessions (
-session_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-date VARCHAR(30) NOT NULL,
-time VARCHAR(30) NOT NULL,
-group_id INT(6) UNSIGNED,
-CONSTRAINT sess_group_id_fk FOREIGN KEY (group_id)
-REFERENCES groups(group_id)
+$sql = "CREATE TABLE groups (
+group_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+attendees INT(3) NOT NULL,
+user_id INT(6) UNSIGNED,
+session_id INT(6) UNSIGNED,
+experience VARCHAR(20),
+equipment BOOLEAN,
+CONSTRAINT group_session_id_fk FOREIGN KEY (session_id)
+REFERENCES sessions(session_id),
+CONSTRAINT group_user_id_fk FOREIGN KEY (user_id)
+REFERENCES members(user_id)
+
 )";
 if ($conn->query($sql) === TRUE) {
-    echo "Table sessions created successfully";
+    echo "Table groups created successfully";
 } else {
     echo "Error creating table: " . $conn->error;
 }
