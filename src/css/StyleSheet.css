@@ -2,17 +2,6 @@
     background-color: #97B6FF;
 }
 
-p {
-    /*color:darkred*/;
-}
-
-/*h1 {
-    color:darkred;
-    font-style:italic;
-    font-size:50px;
-    text-align:center;
-}*/
-
 div
 {
     background-color:#97B6FF;
@@ -24,10 +13,6 @@ footer {
    bottom:0px;
    height:30px;
    width:100%;
-}
-
-.navigation{
-
 }
 
 .buttons{
@@ -47,19 +32,21 @@ footer {
     padding-bottom: 10px;
 }
 
-ul {
+ul.navH{
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #333;
+    border:ridge;
+    border-color:black;
 }
 
-li {
-    float: left;
+ul.navH li{
+     float: left;
 }
 
-li a {
+ul.navH a{
     display: block;
     color: white;
     text-align: center;
@@ -67,8 +54,26 @@ li a {
     text-decoration: none;
 }
 
+ul.navV{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #333;
+}
+
+ul.navV a{
+    display: block;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
 .active {
     background-color:grey;
+    border-left:ridge;
+    border-right:ridge;
+    border-color:white;
 }
 
  .left {
