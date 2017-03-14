@@ -13,6 +13,8 @@ footer {
    bottom:0px;
    height:30px;
    width:100%;
+   border-top:ridge;
+   border-top-color:grey;
 }
 
 .buttons{
@@ -58,8 +60,9 @@ ul.navV{
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 200px;
+    width: 15%;
     background-color: #333;
+    float:left
 }
 
 ul.navV a{
@@ -67,6 +70,15 @@ ul.navV a{
     color: white;
     padding: 8px 16px;
     text-decoration: none;
+}
+
+ul.navV span{
+    display: block;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-bottom:ridge;
+    border-color:grey;
 }
 
 .active {
@@ -86,4 +98,10 @@ ul.navV a{
     margin-left: 5%;
     float: left;
     text-align: right;
+}
+
+.stf_frame{
+    width:85%;
+    height:500px;
+    border:hidden;
 }
