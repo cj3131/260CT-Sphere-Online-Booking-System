@@ -7,6 +7,8 @@ div
     background-color:#97B6FF;
 }
 
+html, body, iframe { height: 100%; }
+
 footer {
    position:fixed;
    left:0px;
@@ -102,6 +104,6 @@ ul.navV span{
 
 .stf_frame{
     width:85%;
-    height:500px;
+    height:85%;
     border:hidden;
 }
