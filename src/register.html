@@ -31,52 +31,49 @@
             <li><a href="updatedetails.html" title="update">Update Details</a></li>
         </ul>
     
-        <form method="get" action="registerPHP.php">
+        
+        <form method="post" action="registerPHP.php">
 
-        <div class= "title">
-            <h1>Register</h1>
-        </div>
+            <div class= "title">
+                <h1>Register</h1>
+            </div>
 
-        <div class= "left">
-            <p><label>First Name</label>
-            <input type="text" name="customer_firstname" autofocus></p>
-            <p><label>Surname</label>
-            <input type="text" name="customer_surname" ></p>
-            <p><label>Phone Number</label>
-            <input type="number" name="phone_number" ></p>
-            <p><label>Email address</label>
-            <input type="email" name="email_adress" ></p>
-            <p><label for="DoB">Date Of Birth</label>
-            <input id="DoB" type="date" value="1996-22-12" style = "width: 173px"></p>
-            <p><label>New Password</label>
-            <input type="password" name="password"></p>
-            <p><label>Comfirm New Password</label>
-            <input type="password" name="C_password"></p>
-        </div>
-    
-        <div class = "right">
-            <p><label>Address Line</label><input type="text" name="customer_address1" autofocus></p>
-            <p><label>Address Line (optional)</label>
-            <input type="text" name="customer_address2" autofocus></p>
-            <p><label>City</label>
-            <input type="text" name="customer_city" autofocus></p>
-            <p><label>County</label>
-            <input type="text" name="customer_county" autofocus></p>
-            <p><label>Postcode</label>
-            <input type="text" name="customer_postcode" autofocus></p>
-            <br><br><br>
-            
-            
-            <input type="submit" value="Submit">
-            
-            
-            <p><button form="nameform" type="submit">Save Details </button></p>
-            
-            
-            <a href="registerPHP.php">Test</a>
-            
-        </div>
+            <div class= "left">
+                <p><label>First Name</label>
+                <input type="text" name="customer_firstname" autofocus></p>
+                <p><label>Surname</label>
+                <input type="text" name="customer_surname" ></p>
+                <p><label>Phone Number</label>
+                <input type="number" name="phone_number" ></p>
+                <p><label>Email address</label>
+                <input type="email" name="email_address" ></p>
+                <p><label for="DoB">Date Of Birth</label>
+                <input id="DoB" type="date" name="dob" style = "width: 173px"></p>
+                <p><label>New Password</label>
+                <input type="password" name="password"></p>
+                <p><label>Comfirm New Password</label>
+                <input type="password" name="confirm_password"></p>
+            </div>
 
+            <div class = "right">
+                <p><label>Address Line</label>
+                <input type="text" name="customer_address1" autofocus></p>
+                <p><label>Address Line (optional)</label>
+                <input type="text" name="customer_address2" autofocus></p>
+                <p><label>City</label>
+                <input type="text" name="customer_city" autofocus></p>
+                <p><label>County</label>
+                <input type="text" name="customer_county" autofocus></p>
+                <p><label>Postcode</label>
+                <input type="text" name="customer_postcode" autofocus></p>
+                <br><br><br>
+
+
+                <input type="submit" value="Submit">
+
+            </div>
+        </form>
+        
         <footer>
             <a href="contact.html">Contact us</a> <a href="https://www.paypal.me/CallumHuntington">Send us money</a> <a href="about.html">About</a>
         </footer>
