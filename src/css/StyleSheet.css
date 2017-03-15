@@ -2,8 +2,7 @@
     background-color: #97B6FF;
 }
 
-div
-{
+div {
     background-color:#97B6FF;
 }
 
@@ -72,6 +71,7 @@ ul.navV a{
     color: white;
     padding: 8px 16px;
     text-decoration: none;
+    cursor:pointer;
 }
 
 ul.navV span{
