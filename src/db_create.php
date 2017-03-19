@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "sphere2_db";
+$dbname = "sphere3_db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 } 
 
 
-$sql = "CREATE DATABASE sphere2_db";
+$sql = "CREATE DATABASE sphere3_db";
 
 if ($conn->query($sql) === TRUE) {
     echo "Database created successfully";
@@ -33,7 +33,7 @@ $sql = "CREATE TABLE members (
 user_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
 first_name VARCHAR(30) NOT NULL,
 last_name VARCHAR(30) NOT NULL,
-email TIMESTAMP NOT NULL,
+email VARCHAR(30) NOT NULL,
 phone_number INT(11),
 dob DATE NOT NULL,
 address_one VARCHAR(30) NOT NULL,

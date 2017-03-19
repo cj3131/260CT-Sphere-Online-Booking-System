@@ -1,4 +1,32 @@
-﻿<!DOCTYPE html>
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "sphere3_db";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+$email = $_POST["email"];
+$password = $_POST["password"];
+
+$sql = "SELECT password, email FROM members  WHERE password = '{$password}' AND email = '{$email}'";		
+$result = $conn->query($sql);		
+  		  
+if ($result->num_rows > 0) {		
+    // output data of each row		
+    while($row = $result->fetch_assoc()) {		
+        header("location: home.html");	
+    }		
+		
+}
+$conn->close();
+?>
+
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="css/StyleSheet.css">
@@ -26,6 +54,9 @@
                 <input type="password" name="password" />
             </p>
             <input type="submit" value="Login">
+            <p style="color:red">
+            <label style="display: block" >ERROR - Wrong password or email</label>
+            </p>
         </div>
 
         <a href="customer_page.html" title="Customer page">Customer page</a> <br />

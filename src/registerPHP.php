@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "sphere2_db";
+$dbname = "sphere3_db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
