@@ -4,7 +4,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "sphere4_db";
+$dbname = "sphere5_db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -56,7 +56,7 @@ if ($result->num_rows > 0) {
     }
 
 
-$sql = "INSERT INTO groups (session_id, attendees, experience, equipment) VALUES ('{$session_id}','{$attendees}','{$experience}','{$equipment}')";
+$sql = "INSERT INTO bookings (session_id, attendees, experience, equipment) VALUES ('{$session_id}','{$attendees}','{$experience}','{$equipment}')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";

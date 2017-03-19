@@ -31,7 +31,7 @@
             $servername = "localhost";
             $username = "root";
             $password = "";
-            $dbname = "sphere2_db";
+            $dbname = "sphere5_db";
 
             // Create connection
             $conn = new mysqli($servername, $username, $password, $dbname);
