@@ -53,10 +53,6 @@
                          "</td>"."<td>" .$row["role"]. "</td>".
                          "<td>" .$row["salary"]. "</td></tr>";
                 }
-            } 
-            else 
-            {
-                echo "0 results";
             }
 
             $conn->close();
