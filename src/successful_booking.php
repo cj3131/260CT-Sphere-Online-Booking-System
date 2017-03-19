@@ -4,7 +4,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "sphere2_db";
+$dbname = "sphere4_db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -23,22 +23,44 @@ $comments = $_POST["comments"];
 $equipment = $_POST["equipment"];
 
 
-$sql = "SELECT (date,time)"
-$sql = "INSERT INTO sessions (date, time) VALUES ('{$date}','{$time}')";
 
-if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
-    
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+
+$sql = "SELECT * FROM sessions WHERE date = '{$date}' AND time = '{$time}'";
+$result = $conn->query($sql);		
+
+if ($result->num_rows > 0) {		
+    // output data of each row		
+    while($row = $result->fetch_assoc()) {
+        $session_id = $row["session_id"];
+    }		
 }
+else{
+        $sql = "INSERT INTO sessions (date, time) VALUES ('{$date}','{$time}')";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    
+    $sql = "SELECT * FROM sessions WHERE date = '{$date}' AND time = '{$time}'";
+$result = $conn->query($sql);		
+
+if ($result->num_rows > 0) {		
+    // output data of each row		
+    while($row = $result->fetch_assoc()) {
+        $session_id = $row["session_id"];
+    }		
+}
+    }
 
 
-$sql = "INSERT INTO groups (attendees, experience, comments, equipment) VALUES ('{$attendees}','{$experience}','{$comments}','{$equipment}')";
+$sql = "INSERT INTO groups (session_id, attendees, experience, equipment) VALUES ('{$session_id}','{$attendees}','{$experience}','{$equipment}')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
-    
+
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

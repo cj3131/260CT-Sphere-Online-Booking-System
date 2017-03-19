@@ -21,7 +21,7 @@
 
             <div>
             <label for="date">Which day do you want to book a session for?</label>
-            <input id="date" type="date" value="1996-22-12" style = "width: 173px">
+            <input id="date" type="date" name="date" style = "width: 173px">
             </div>
             
             <br><br>
@@ -41,7 +41,7 @@
             
             <div>
               <label for="attendees"></label> How many people will be attending?
-              <input type="number" id="attendees" value="1" required>
+              <input type="number" id="attendees" name="attendees" value="1" required>
             </div>
 
             <br><br>
@@ -59,13 +59,13 @@
             
             <div>
             <label for="comment">Additional Comments </label>
-            <textarea name="comments" id="comment"></textarea>
+            <textarea name="comment" id="comment"></textarea>
             </div>
             
             <br>
 
             <div>
-                <input type="checkbox" name="vehicle" value="Bike">Do you require equipment hire?
+                <input type="checkbox" name="equipment" id="equipment">Do you require equipment hire?
             </div>
             <br>
 
