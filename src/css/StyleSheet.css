@@ -17,7 +17,23 @@ footer {
    border-top:ridge;
    border-top-color:grey;
 }
-
+.container {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	height: 1200px;
+	background-color: #97B6FF;
+}
+body {
+	font-family: source-sans-pro;
+	background-color: #f2f2f2;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	font-style: normal;
+	font-weight: 200;
+}
 .buttons{
     display:inline;
     margin:auto;
@@ -33,6 +49,27 @@ footer {
     margin:0px 0px 0px 0px;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.form {
+	clear: both;
+	display: inline-block;
+	width: 100%;
+	background-color: #FFFFFF;
+	/* [disabled]min-width: 400px;
+*/
+	padding-bottom: 0px;
+	padding-top: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+.entrylabel{
+	padding-top: 30px;
+	float: lef;
 }
 
 ul.navH{
