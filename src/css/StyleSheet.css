@@ -26,7 +26,7 @@ footer {
 }
 body {
 	font-family: source-sans-pro;
-	background-color: #f2f2f2;
+	background-color: #97B6FF;
 	margin-top: 0px;
 	margin-right: 0px;
 	margin-bottom: 0px;
@@ -127,7 +127,7 @@ ul.navV span{
     border-color:white;
 }
 
- .left {
+.left {
     width: 35%;
     float: left;
     text-align: right;
