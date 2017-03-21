@@ -16,7 +16,12 @@
                 </p>
                 <p>
                     <label>Role</label>
-                    <input type="text" name="Role" >
+                    <select name="Role">
+                        <option value="Manager">Manager</option>
+                        <option value="Reception">Reception</option>
+                        <option value="IT Support">IT Support</option>
+                        <option value="Staff">Staff</option>
+                    </select>
                 </p>
                 <p>
                     <label>Salary</label>
