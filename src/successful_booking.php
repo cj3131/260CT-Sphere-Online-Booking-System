@@ -38,7 +38,7 @@ else{
         $sql = "INSERT INTO sessions (date, time) VALUES ('{$date}','{$time}')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
+            //echo "New record created successfully";
 
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
@@ -59,7 +59,7 @@ if ($result->num_rows > 0) {
 $sql = "INSERT INTO bookings (session_id, attendees, experience, equipment) VALUES ('{$session_id}','{$attendees}','{$experience}','{$equipment}')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
+    //echo "New record created successfully";
 
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;

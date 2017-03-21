@@ -24,14 +24,12 @@ $city = $_POST["customer_city"];
 $county = $_POST["customer_county"];
 $postcode = $_POST["customer_postcode"];
 
-echo "test 2";
 
 $sql = "INSERT INTO members (first_name, last_name, email, phone_number, dob, address_one, address_two, city, country, postcode, password)
 VALUES ('{$firstname}','{$surname}','{$email}','{$phonenumber}','{$dob}','{$customer_address_one}','{$customer_address_two}','{$city}',
 '{$county}','{$postcode}','{$password}')"; 
 
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
     
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
