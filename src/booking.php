@@ -3,8 +3,50 @@
     <head>
         <link rel="stylesheet" type="text/css" href="css/StyleSheet.css">
         <title>Online Booking System</title>
+        <script type="text/javascript">
+            function show_equipment(box) {
+
+            var chboxs = document.getElementsByName("equipment");
+            var vis = "none";
+            for(var i=0;i<chboxs.length;i++) { 
+                if(chboxs[i].checked){
+                 vis = "block";
+                    break;
+                }
+            }
+            document.getElementById(box).style.display = vis;
+            }
+        </script>
+        <style>
+        table, th, td {
+            border: 1px solid black;
+            table-layout: fixed;
+        }
+        </style>
     </head>
     <body>
+        
+        <?php
+            // define variables and set to empty values
+            $dateErr = "";
+            $dateValue = "";
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+              if (empty($_POST["dateValue"])) {
+                $dateErr = "You must select a date.";
+              } else{
+                  $dateValue = test_input($_POST["dateValue"]);
+              }
+            }
+            function test_input($data) {
+              $data = trim($data);
+              $data = stripslashes($data);
+              $data = htmlspecialchars($data);
+              return $data;
+            }
+        ?>
+        
+        
+        
        <div class="container">
         <div>
             <ul class="navH">
@@ -18,7 +60,7 @@
 
         <h1>Book a session</h1>
 
-        <div class ="form"><form method="post" action="successful_booking.php">
+        <div class ="form"><form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <div>
               <table width="450px">
 				<tr>
@@ -28,6 +70,7 @@
 				  <td valign="top">
 					<input id="date" type="date" name="date" style = "width: 173px">
 				  </td>
+                    <td><span class="error">* <?php echo $dateErr; ?> </span></td>
 				</tr>
 				
 				<tr>
@@ -78,24 +121,38 @@
 
 					<tr>
 					 <td valign="top">
-					  <label for="equipment">Do you require equipment hire?</label>
-					 </td>
-					 <td valign="top">
-					  <input type="checkbox" name="equipment" id="equipment">
-					 </td>
-					</tr>
-					
-					<tr>
-					 <td valign="top">
 					  <label for="instructor">Do you require an instructor during your ski session?</label>
 					 </td>
 					 <td valign="top">
 					  <input type="checkbox" name="instructor" id="instructor">
 					 </td>
 					</tr>
+                  
+                    <tr>
+					 <td valign="top">
+					  <label for="equipment">Do you require equipment hire?</label>
+					 </td>
+					 <td valign="top">
+					  <input type="checkbox" name="equipment" id="equipment" onclick="show_equipment('gearselect')">
+					 </td>
+					
+					
+                  <td>
+                    <div id="gearselect" style="display:none">
+                        <form>
+                            <input type="checkbox" name="skis" id="skis">Skis
+                            <input type="checkbox" name="goggles" id="goggles">Goggles
+                            <input type="checkbox" name="gloves" id="gloves">Gloves
+                            <input type="checkbox" name="poles" id="poles">Poles
+                            <input type="checkbox" name="boots" id="boots">Boots
+                            <input type="checkbox" name="helmet" id="helmet">Helmet
+                        </form>
+                    </div>
+                  </td>
+					</tr>
 							
 					<tr>
-					 <td colspan="2" style="text-align:center">
+					 <td colspan="0" style="text-align:center">
 					  <input type="submit" value="Submit">
 					 </td>
 					</tr>
@@ -109,4 +166,7 @@
         </footer>
     </div>
     </body>
-</html>
+<!--
+http://stackoverflow.com/questions/25241295/redirect-to-new-page-after-form-submitted-and-validated-using-php?rq=1
+http://stackoverflow.com/questions/18421082/show-hide-div-if-checkbox-selected
+--></html>
