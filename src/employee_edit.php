@@ -24,7 +24,7 @@
                     </select>
                 </p>
                 <p>
-                    <label>Salary</label>
+                    <label>Salary(ph)</label>
                     <input type="text" name="Salary" >
                 </p>   
                 <input type="submit" name="SubmitButton"> 

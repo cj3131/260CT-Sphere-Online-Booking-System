@@ -7,13 +7,15 @@ function getEmployeeList()
 {
     $.ajax({        
         type:'GET',
-        url: 'getEmployee.php',
+        //url: 'getEmployee.php',
+        url: 'Controller_test.php',
+        data: {"selector" : "empList"},
         dataType: 'json',      
         success: function(data)
         {
             for(var i in data)
             {
-                addTableEntry(data[i].staff_id,data[i].first_name,data[i].last_name,data[i].role,data[i].salary)
+                addTableEntry(data[i].staff_id,data[i].first_name,data[i].last_name,data[i].role,data[i].salary);
             }
         }
     });
