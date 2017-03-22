@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-    <head>
+    
+	<head>
         <link rel="stylesheet" type="text/css" href="css/StyleSheet.css">
         <title>Online Booking System</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,8 @@
         }
         </style>
     </head>
-    <body>
+    
+	<body>
     <form method="get" action="/html/codes/html_form_handler.cfm">
 
         <ul class="navH">
@@ -37,23 +39,23 @@
             
             <p>
             <label>First Name</label>
-            <input type="text" name="customer_firstname" value="Ivo" autofocus style="width: 165px">
+            <input type="text" name="customer_firstname" placeholder="Ivo" autofocus style="width: 165px">
             </p>
             <p>
             <label>Surname</label>
-            <input type="text" name="customer_surname" value="Iliev" style="width: 165px">
+            <input type="text" name="customer_surname" placeholder="Iliev" style="width: 165px">
             </p>
             <p>
             <label>Phone Number</label>
-            <input type="number" name="phone_number" value="0886221932" style="width: 165px">
+            <input type="number" name="phone_number" placeholder="0044 1234 5678" style="width: 165px">
             </p>
             <p>
             <label>Email address</label>
-            <input type="email" name="email_adress" value="ilievi@uni.coventry.ac.uk" style="width: 165px">
+            <input type="email" name="email_adress" placeholder="example@uni.coventry.ac.uk" style="width: 165px">
             </p>
             <p>
             <label for="DoB">Date Of Birth</label>
-            <input id="DoB" type="date" value="1996-22-12" style ="width: 165px">
+            <input id="DoB" type="date" style ="width: 165px">
             </p>
             <p>
             <label>New Password</label>
@@ -64,7 +66,7 @@
             <input type="password" name="C_password" style="width: 165px">
             </p>
             <p>
-            <button>Save Details</button>
+            <button><a href="detailssaved.html" title="detailssaved">Save Details</button>
             </p>
         </div>
 
