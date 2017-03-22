@@ -57,7 +57,7 @@
         
         <ul class="navH">
             <li><a href="home.html" title="home">Home</a></li>
-            <li><a href="booking.html" title="booking">Booking</a></li>
+            <li><a href="booking.php" title="booking">Booking</a></li>
             <li class="active"><a href="register.php" title="register">Register</a></li>
             <li><a href="login.html" title="login">Log in</a></li>
             <li><a href="updatedetails.html" title="update">Update Details</a></li>
@@ -71,7 +71,7 @@
             </div>
             <table>
             <tr>
-                <td><lable>Name: </lable></td>
+                <td><label>Name: </label></td>
                 <td><input type="text" name="first_name" value="<?php echo $first_name;?>"></td>
                       <td><span class="error">* <?php echo $first_nameErr;?></span></td>
             </tr> 
