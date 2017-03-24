@@ -144,8 +144,8 @@ CONTACT FORM CLASSS
 /*-------------------------------------------------
 FOOTER CLASSES
 -------------------------------------------------*/
-.footer-wrap{ background:url(../images/bg2.jpg); margin-top:80px; overflow:hidden;}
-.footer-wrap .wrap{ width:960px; margin:0 auto;background:url(../images/footerbg-light.png) no-repeat center; height:208px; padding-top:60px; padding-bottom:60px; overflow:hidden;}
+.footer-wrap{ background:url(../images/bg2.jpg); margin-top:40px; overflow:hidden;}
+.footer-wrap .wrap{ width:960px; margin:0 auto;background:url(../images/footerbg-light.png) no-repeat center; height:208px; padding-top:20px; padding-bottom:60px; overflow:hidden;}
 .footer-wrap .wrap .panel{width:300px; float:left;}
 .footer-wrap .wrap .panel .title{ color:#ffffff; padding-bottom:30px;}
 .testimonials{background:url(../images/testimonials-bg.png) no-repeat; width:220px; height:106px; padding:30px 50px 30px 30px;}
@@ -163,7 +163,7 @@ FOOTER CLASSES
 .cotact ul li img{ padding-right:10px;}
 
 
-.copyright-wrap{ background:url(../images/bg3.jpg) repeat-x center; height:63px; padding-top:45px;}
+.copyright-wrap{ background:url(../images/bg3.jpg) repeat-x center; height:40px; padding-top:10px;}
 .copyright-wrap .content{text-align:center; color:#feaf32;}
 .copyright-wrap .content p a{ color:#feaf32; text-decoration:none;}
 .copyright-wrap .content p a:hover{ color:#ffffff;}

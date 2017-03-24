@@ -141,8 +141,9 @@
 
 		  <label> <span><br>Additional Comments
             <textarea class="message" name="comment" id="comment"></textarea></span>
-            <input type="button" class="button" value="Submit Booking" />
+            
             </label>
+            <input type="button" class="button" value="Submit Booking" />
           </div>
         </form>
         <div class="clearing"></div>
@@ -223,7 +224,7 @@
         <ul>
           <li><img src="images/icon6.png" alt="" />123456789</li>
           <li><img src="images/icon7.png" alt="" /><a href="mailto:patrickjohnson0605@gmail.com">patrickjohnson0605@gmail.com</a></li>
-          <li><img src="images/icon8.png" alt="" />Made as part of 260CT Software Engineering</li>
+          <li><img src="images/icon8.png" alt="" />260CT Software Engineering</li>
         </ul>
       </div>
     </div>
