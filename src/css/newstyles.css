@@ -39,7 +39,7 @@ HEADER CLASSES
 MENU CLASSES
 -------------------------------------------------*/
 .menu-wrap{ overflow:hidden; margin:25px auto 30px auto; width:960px;}
-.menu{ float:left; width:700px;}
+.menu{ float:left; width:660px;}
 .menu ul li{ list-style:none; float:left; width:88px; text-align:center; line-height:40px; margin-right:10px;}
 .menu ul li a{ text-decoration:none; font-size:15px; font-weight:bold; text-transform:uppercase; text-align:center; display:block; color:#ffed71;}
 .menu ul li a:hover{ color:#ffffff;  background:url(../images/menu-btn.png) no-repeat;}
@@ -57,7 +57,7 @@ BANNER CLASSES
 -------------------------------------------------*/
 .banner-wrap{width:960px; overflow:hidden; margin:0 auto;}
 .banner{ height:430px; background:url(../images/banner-bg.png) no-repeat;}
-.banner .banner-img{ margin:0 auto; padding-top:0px; width:1000px;}
+.banner .banner-img{ margin:0 auto; padding-top:54px; width:420px;}
 .shadow{ width:950px; height:38px; background:url(../images/shadow.png) no-repeat center; margin-bottom:45px;}
 
 /*-------------------------------------------------
@@ -130,9 +130,9 @@ CONTACT FORM CLASSS
 
 .contact-form {padding:30px; width:100%; float:left;}
 .contact-form label {display: block; padding:10px 0 10px 0;}
-.contact-form label span {display: block; color:#ffed71;font-size:16px; float:left; width:80px; text-align:left; padding:5px 20px 0 0;}
-.contact-form .input_text {padding:10px 10px; width:440px; background:#1e3246;border: none; color:#fff; background:url(../images/bg2.jpg) repeat-x; outline:none; font-family:"Trebuchet MS"; font-size:14px;}
-.contact-form .message{padding:10px 10px; width:440px; color:#fff;border: none;overflow:hidden;height:150px;background:url(../images/bg2.jpg); outline:none; font-family:"Trebuchet MS"; font-size:14px;}
+.contact-form label span {display: block; color:#ffed71; font-size:16px; float:left; width:300px; text-align:left; padding:5px 20px 0 0;}
+.contact-form .input_text {padding:5px 10px; width:250px; background:#1e3246;border: none; color:#fff; background:url(../images/bg2.jpg) repeat-x; outline:none; font-family:"Trebuchet MS"; font-size:14px;}
+.contact-form .message{padding:10px 10px; width:270px; color:#fff;border: none;overflow:hidden;height:40px;background:url(../images/bg2.jpg); outline:none; font-family:"Trebuchet MS"; font-size:14px;}
 .contact-form .button{padding:8px;background:#ff9c00; color:#1e3246; text-transform:uppercase; font-family:"Trebuchet MS"; border:0px solid;margin-left:100px;margin-top:20px;}
 
 .address { float:left; width:370px; margin-left:30px;}

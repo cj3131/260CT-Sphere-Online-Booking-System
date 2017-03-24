@@ -30,10 +30,6 @@ body {
 	font-style: normal;
 	font-weight: 200;
 }
-.fit{
-    width:1%;
-    white-space:nowrap;
-}
 textarea {
     max-width: 100%; 
     max-height: 100%;
@@ -59,7 +55,6 @@ textarea {
 	clear: both;
 	display: inline-block;
 	width: 100%;
-	background-color: #FFFFFF;
 	/* [disabled]min-width: 400px;
 */
 	padding-bottom: 0px;
@@ -72,9 +67,8 @@ textarea {
 	padding-left: 0px;
 }
 .entrylabel{
-	padding-top: 0px;
-    padding-bottom: 60px;
-	
+	padding-top: 30px;
+	float: lef;
 }
 
 ul.navH{
@@ -123,26 +117,6 @@ ul.navV span{
     text-decoration: none;
     border-bottom:ridge;
     border-color:grey;
-}
-
-.logo{
-    color: #fff;
-	font-weight: bold;
-	text-align: undefined;
-	width: 15%;
-	float: right;
-	margin-top: 15px;
-	margin-left: 25px;
-	letter-spacing: 4px
-}
-
-#divlogo {
-	position: absolute;
-	width: 335px;
-	height: 50px;
-	z-index: 1;
-	right: 20%;
-	top: 0px;	
 }
 
 .active {
