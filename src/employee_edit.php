@@ -1,44 +1,40 @@
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="css/StyleSheet.css">
+        <link rel="stylesheet" type="text/css" href="css/newstyles.css">
     </head>
     <body>
         <form method="post" action="">
-            <div class= "left" style="text-align: left">
-                <p >Add employee</p>
-                <p>
-                    <label>First Name</label>
-                    <input type="text" name="Staff_fname" autofocus>
-                </p>
-                <p>
-                    <label>Last name</label>
-                    <input type="text" name="Staff_lname" >
-                </p>
-                <p>
-                    <label>Role</label>
-                    <select name="Role">
+            <div class="contact-form mar-top30">
+                
+                <label><span>First Name</span>
+                <input class="input_text" type="text" name="Staff_fname" autofocus></label>
+
+                <label><span>Last name</span>
+                <input class="input_text" type="text" name="Staff_lname" ></label>
+
+                <label><span>Role</span>
+                    <select class="input_text" name="Role">
                         <option value="Manager">Manager</option>
                         <option value="Reception">Reception</option>
                         <option value="IT Support">IT Support</option>
                         <option value="Staff">Staff</option>
-                    </select>
-                </p>
-                <p>
-                    <label>Salary(ph)</label>
-                    <input type="text" name="Salary" >
-                </p>   
-                <input type="submit" name="SubmitButton"> 
+                    </select></label>
+                    
+                <label><span>Salary(ph)</span></label>
+                <input class="input_text" type="text" name="Salary" >
+               
+                <input class="button" type="submit" name="SubmitButton"> 
             </div>
         </form>
 
         <form method="post" action="">
-            <div class= "right" style="text-align: left">
-                <p>Delete employee</p>
-                <p>
-                    <label>Staff ID</label>
-                    <input type="text" name="ID" autofocus>
-                </p>  
-                <input type="submit" name="SubmitButton2"> 
+            <div class="contact-form mar-top30">
+                <label><span>Delete employee</span></label>
+          
+                <label><span>Staff ID</span>
+                <input class="input_text" type="text" name="ID" autofocus></label>
+                
+                <input class="button" type="submit" name="SubmitButton2"> 
             </div>
         </form>
     </body>
