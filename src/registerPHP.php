@@ -11,19 +11,19 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-
-$firstname = $_POST["customer_firstname"];
-$surname = $_POST["customer_surname"];
-$email = $_POST["email_address"];
-$phonenumber = $_POST["phone_number"];
-$dob = $_POST["dob"];
+$firstname = $_POST["first_name"];
+$surname = $_POST["surname"];
+$email = $_POST["email"];
+$phonenumber = $_POST["phoneNum"];
+$dob = $_POST["DoB"];
 $password = $_POST["password"];
-$customer_address_one = $_POST["customer_address1"];
-$customer_address_two = $_POST["customer_address2"];
-$city = $_POST["customer_city"];
-$county = $_POST["customer_county"];
-$postcode = $_POST["customer_postcode"];
+$customer_address_one = $_POST["addLine1"];
+$customer_address_two = $_POST["addLine2"];
+$city = $_POST["city"];
+$county = $_POST["county"];
+$postcode = $_POST["postcode"];
 
+echo "$firstname";
 
 $sql = "INSERT INTO members (first_name, last_name, email, phone_number, dob, address_one, address_two, city, country, postcode, password)
 VALUES ('{$firstname}','{$surname}','{$email}','{$phonenumber}','{$dob}','{$customer_address_one}','{$customer_address_two}','{$city}',

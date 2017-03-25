@@ -3,7 +3,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Sphere Booking System</title>
-
+    
+<script type="text/javascript">
+    function chgAction(num)
+    {
+        //document.getElementById("myForm").action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>";
+        document.getElementById("myForm").submit();
+        
+       
+        
+        if (num == 0){
+            
+            
+            document.getElementById("myForm").action = "registerPHP.php";
+            document.getElementById("myForm").submit();
+            
+        }
+    }
+</script>
+    
   <style>
                 table
         {
@@ -13,7 +31,7 @@
         * {
             box-sizing: border-box;
         }
-        .error {color: #FF0000;}
+        .error {color: #ffffff !important;}
             
         .left {
             width: 35%;
@@ -30,22 +48,186 @@
 <link href="css/newstyles.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+            
             <?php
             // define variables and set to empty values
-            $first_nameErr = "";
-            $first_name = "";
+            $first_nameErr = $surnameErr = $phoneNumErr = $emailErr = $passwordErr = $comPasswordErr = $DoBErr =  $addLine1Err = $addLine2Err = $cityErr = $countyErr = $postcodeErr = "";
+            $first_name = $surname = $phoneNum = $email = $password = $comPassword = $DoB = $addLine1 = $addLine2 = $city = $county = $postcode = "";
+    
+            $errorCount = 1;
+            
 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
               if (empty($_POST["first_name"])) {
-                $first_nameErr = "Name is required";
+                $first_nameErr = "First name is required";
+                $errorCount = $errorCount + 1;
               } else {
                 $first_name = test_input($_POST["first_name"]);
                 // check if name only contains letters and whitespace
                 if (!preg_match("/^[a-zA-Z ]*$/",$first_name)) {
-                  $first_nameErr = "Only letters and white space allowed"; 
+                  $first_nameErr = "Only letters and white space allowed";
+                  $errorCount = $errorCount + 1;
                 }
               }
+            
+        
+           
+              if (empty($_POST["surname"])) {
+                $surnameErr = "Last name is required";
+                $errorCount = $errorCount + 1;
+              } else {
+                $surname = test_input($_POST["surname"]);
+                // check if name only contains letters and whitespace
+                if (!preg_match("/^[a-zA-Z ]*$/",$surname)) {
+                  $surnameErr = "Only letters and white space allowed"; 
+                  $errorCount = $errorCount + 1;
+                 }
+              }
+                
+        
+            
+              if (empty($_POST["phoneNum"])) {
+                $phoneNumErr = "Phone number is required";
+                $errorCount = $errorCount + 1;
+              } else {
+                $phoneNum = test_input($_POST["phoneNum"]);
+                // check if name only contains letters and whitespace
+                if (!preg_match("/^[0-9]*$/",$phoneNum)) {
+                  $phoneNumErr = "Only numbers are allowed"; 
+                  $errorCount = $errorCount + 1;
+                }
+              }
+                    
+        
+                if (empty($_POST["email"])) {
+                    $emailErr = "Email is required";
+                    $errorCount = $errorCount + 1;
+                } else {
+                    $email = test_input($_POST["email"]);
+                    // check if e-mail address is well-formed
+                    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        $emailErr = "Invalid email format"; 
+                        $errorCount = $errorCount + 1;
+                    }
+                      }
+                
+                if (empty($_POST["password"])) {
+                    $passwordErr = "Password is required";
+                    $errorCount = $errorCount + 1;
+                } else {
+                    $password = test_input($_POST["password"]);
+                    // check if e-mail address is well-formed
+                    if (!preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/",$password)) {
+                        $passwordErr = "Invalid password format"; 
+                        $errorCount = $errorCount + 1;
+                    }
+                      }
+                
+                if (empty($_POST["comPassword"])) {
+                    $comPasswordErr = "Comfirm Password is required";
+                    $errorCount = $errorCount + 1;
+                } else {
+                    $password = test_input($_POST["password"]);
+                    $comPassword = test_input($_POST["comPassword"]);
+                    if (test_password($password,$comPassword) == false){
+                        $passwordErr = "Passwords don't match";
+                        $errorCount = $errorCount + 1;
+                    }
+                }
+                
+                if (empty($_POST["DoB"])) {
+                    $DoBErr = "Date of Birth is required";
+                    $errorCount = $errorCount + 1;
+                } else {
+                    $DoB = test_input($_POST["DoB"]);
+                    if (test_date($DoB) == false){
+                        $DoBErr = "Date of birth has to be a date in the past";
+                        $errorCount = $errorCount + 1;
+                    }
+                }
+                
+                if (empty($_POST["addLine1"])) {
+                    $addLine1Err = "An address is required";
+                    $errorCount = $errorCount + 1;
+                } else {
+                    $addLine1 = test_input($_POST["addLine1"]);
+                    if (!preg_match("/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/",$addLine1)){
+                        $addLine1Err = "Must be a valid address";
+                        $errorCount = $errorCount + 1;
+                    }
+                }
+                
+                    $addLine2 = test_input($_POST["addLine2"]);
+                    if (!preg_match("/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/",$addLine2)){
+                        $addLine2Err = "Must be a valid address";
+                        $errorCount = $errorCount + 1;
+                    }
+                
+    
+                if (empty($_POST["city"])) {
+                    $cityErr = "City is required";
+                    $errorCount = $errorCount + 1;
+                  } else {
+                        $city = test_input($_POST["city"]);
+                        // check if name only contains letters and whitespace
+                        if (!preg_match("/^[a-zA-Z ]*$/",$city)) {
+                          $cityErr = "Only letters and white space allowed";
+                          $errorCount = $errorCount + 1;
+                    }
+              }
+    
+                if (empty($_POST["county"])) {
+                    $countyErr = "County is required";
+                    $errorCount = $errorCount + 1;
+                } else {
+                    $county = test_input($_POST["county"]);
+                    // check if name only contains letters and whitespace
+                    if (!preg_match("/^[a-zA-Z ]*$/",$county)) {
+                        $countyErr = "Only letters and white space allowed";
+                        $errorCount = $errorCount + 1;
+                    }
+                  }
+    
+                if (empty($_POST["postcode"])) {
+                    $postcodeErr = "Postcode is required";
+                    $errorCount = $errorCount + 1;
+                } else {
+                    $postcode = test_input($_POST["postcode"]);
+                    // check if name only contains letters and whitespace
+                    if (!preg_match("/[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}/",$postcode)) {
+                        $postcodeErr = "Valid UK postcodes only";
+                        $errorCount = $errorCount + 1;
+                    }
+                    
+              }
+              $errorCount = $errorCount - 1;
+    
+           
+       
+    }
+    
+            
+    
+        
+            function test_date($Date){
+                $DateOK = false;
+                $todayDate = date("Y-m-d");
+                
+                if ($Date < $todayDate){
+                    $DateOK = true;
+                }
+                return $DateOK;
             }
+                
+        
+            function test_password($Password, $ComPassword){
+                $PasswordOK = false;
+                if($Password == $ComPassword){
+                    $PasswordOK = true;
+                }
+                return $PasswordOK;
+            }
+        
             function test_input($data) {
               $data = trim($data);
               $data = stripslashes($data);
@@ -53,6 +235,7 @@
               return $data;
 }
         ?>
+
 <div class="header-wrap">
 	<div class="logo">
 		<h1>Sphere Skiing</h1>
@@ -94,46 +277,82 @@
       <div class="panel">
       
       
-      <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+      <form id= "myForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
           <div class="contact-form mar-top30">
 
-            <label> <span>First Name<?php echo $first_nameErr; ?></span>
-            <input type="text" class="input_text" name="first_name">
+            <label > <span>First Name * </span>
+            <input type="text" name="first_name" class="input_text" value="<?php echo $first_name;?>">
             </label>
+            <Label class = "error"><?php echo $first_nameErr; ?></Label>
 
-            <label> <span>Surname</span>
-            <input type="text" class="input_text" name="customer_surname">
+            <label> <span>Surname *</span>
+            <input type="text" name="surname" class="input_text" value="<?php echo $surname;?>">
             </label>
+            <Label class = "error"><?php echo $surnameErr;?></Label>
 
-            <label> <span>Date of Birth</span>
-            <input id="DoB" type="date" class="input_text" name="dob">
+            <label> <span>Date of Birth *</span>
+            <input id="DoB" type="date" name="DoB" class="input_text" value="<?php echo $DoB;?>">
             </label>
+            <Label class = "error"><?php echo $DoBErr;?></Label>
 
             <div class="title">
-            <h1></br>Contact details</h1>
+            <h1><br>Contact details</h1>
             <span>Enter your contact details below. We will never sell your details to third parties and will only use these details to contact you with offers or to confirm bookings.</span></div>
 
-            <label> <span>Email Address</span>
-            <input type="email" class="input_text" name="email_address">
+            <label> <span>Email Address *</span>
+            <input type="text" name="email" class="input_text" value="<?php echo $email;?>">
             </label>
+            <Label class = "error"><?php echo $emailErr;?></Label>
 
             <label> <span>Phone Number</span>
-            <input type="number" class="input_text" name="phone_number">
+            <td><input type="number" name="phoneNum" class="input_text" value="<?php echo $phoneNum;?>">
             </label>
+            <Label class = "error"><?php echo $phoneNumErr;?></Label>
 
             <div class="title">
-            <h1></br>Enter a password</h1>
+            <h1><br>Enter a password</h1>
             <span>Please select a password. It must be at least 6 characters and contain at least one letter and number.</span></div>
 
-            <label> <span>New Password</span>
-            <input type="password" class="input_text" name="password">
+            <label> <span>Password *</span>
+            <input type="password" name="password" class="input_text" value="<?php echo $password;?>">
             </label>
+            <Label class = "error"><?php echo $passwordErr;?></Label>
 
-            <label> <span>Confirm New Password</span>
-            <input type="password" class="input_text" name="confirm_password">
+            <label> <span>Confirm Password *</span>
+            <input type="password" name="comPassword" class="input_text" value="<?php echo $comPassword;?>">
             </label>
+            <Label class = "error"><?php echo $comPasswordErr;?></Label>
+              
+            <div class="title">
+            <h1><br>Address details</h1>
+            <span>Enter your address details below. We will never sell your details to third parties and will only use these details to contact you with offers or to confirm bookings.</span></div>
+              
+            <label><span>Address Line *</span></label>
+            <input type="text" name="addLine1" class="input_text" value="<?php echo $addLine1;?>">
+            <Label class = "error"><?php echo $addLine1Err;?></Label>
+              
+            <label><span>Address Line 2</span></label>
+            <input type="text" name="addLine2" class="input_text" value="<?php echo $addLine2;?>">
+            <Label class = "error"><?php echo $addLine2Err;?></Label>
+              
+            <label><span>City *</span></label>
+            <input type="text" name="city" class="input_text" value="<?php echo $city;?>">
+            <Label class = "error"><?php echo $cityErr;?></Label>
+              
+            <label><span>County *</span></label>
+            <input type="text" name="county" class="input_text" value="<?php echo $county;?>">
+            <Label class = "error"><?php echo $countyErr;?></Label>
+              
+            <label><span>Postcode *</span></label>
+            <input type="text" name="postcode" class="input_text" value="<?php echo $postcode;?>">
+            <Label class = "error"><?php echo $postcodeErr;?></Label>
+            
+            <label><?php echo $errorCount == 0;?></label>
+            
+              <label><?php echo $errorCount;?></label>
 
-            <input type="button" class="button" value="Register" />
+            
+            <input type="button" class="button" value="Register" onclick= "chgAction(<?php echo $errorCount ?>)"/>
             
             </div>
 
@@ -202,6 +421,7 @@
             <input name="input" type="text"  class="input-newsletter"/>
           </li>
           <li>
+            
             <input type="button" class="button" value="Signup" />
           </li>
         </ul>
@@ -231,5 +451,7 @@
         </div>
 	</div>
 </div><!---copyright-wrap-End-->
+    
+
 </body>
 </html>
