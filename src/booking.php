@@ -3,47 +3,69 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Sphere Booking System</title>
-<script type="text/javascript">
-                function show_equipment(box) {
 
-                var chboxs = document.getElementsByName("equipment");
-                var vis = "none";
-                for(var i=0;i<chboxs.length;i++) { 
-                    if(chboxs[i].checked){
-                     vis = "block";
-                        break;
-                    }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"> </script>
+
+<script>
+    $(document).ready(function() {
+        $("#starttime").change(function () {
+            var val = $(this).val();
+            if (val == 9) {
+                $("#endtime").html("<option value='10'>10:00</option> <option value='11'>11:00</option> <option value='12'>12:00</option> <option value='13'>13:00</option> <option value='14'>14:00</option> <option value='15'>15:00</option> <option value='16'>16:00</option> <option value='17'>17:00</option>");
+            } else if (val == 10) {
+                $("#endtime").html("<option value='11'>11:00</option> <option value='12'>12:00</option> <option value='13'>13:00</option> <option value='14'>14:00</option> <option value='15'>15:00</option> <option value='16'>16:00</option> <option value='17'>17:00</option>");
+            } else if (val == 11) {
+                $("#endtime").html("<option value='12'>12:00</option> <option value='13'>13:00</option> <option value='14'>14:00</option> <option value='15'>15:00</option> <option value='16'>16:00</option> <option value='17'>17:00</option>");
+            } else if (val == 12) {
+                $("#endtime").html("<option value='13'>13:00</option> <option value='14'>14:00</option> <option value='15'>15:00</option> <option value='16'>16:00</option> <option value='17'>17:00</option>");
+            } else if (val == 13) {
+                $("#endtime").html("<option value='14'>14:00</option> <option value='15'>15:00</option> <option value='16'>16:00</option> <option value='17'>17:00</option>");
+            } else if (val == 14) {
+                $("#endtime").html("<option value='15'>15:00</option> <option value='16'>16:00</option> <option value='17'>17:00</option>");
+            } else if (val == 15) {
+                $("#endtime").html("<option value='16'>16:00</option> <option value='17'>17:00</option>");
+            } else if (val == 16) {
+                $("#endtime").html("<option value='17'>17:00</option>");
+            }
+        });
+});
+</script>
+
+<script>
+        function show_equipment(box) {
+
+            var chboxs = document.getElementsByName("equipment");
+            var vis = "none";
+            for(var i=0;i<chboxs.length;i++) { 
+                if(chboxs[i].checked){
+                    vis = "block";
+                    break;
                 }
-                document.getElementById(box).style.display = vis;
-                }
-  </script>
-  <style>
-                table, th, td {
-                    border: 1px solid black;
-                    table-layout: fixed;
-                }
-  </style>
+            }
+            document.getElementById(box).style.display = vis;
+        } 
+</script>
 <link href="css/newstyles.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-            <?php
-                  // define variables and set to empty values
-                  $dateErr = "";
-                  $dateValue = "";
-                  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    if (empty($_POST["date"])) {
-                      $dateErr = "You must select a date.";
-                    } else{
-                        $dateValue = test_input($_POST["date"]);
-                    }
-                  }
-                  function test_input($data) {
-                    $data = trim($data);
-                    $data = stripslashes($data);
-                    $data = htmlspecialchars($data);
-                    return $data;
-                  }
-              ?>
+    <?php
+    // define variables and set to empty values
+    $dateErr = "";
+    $dateValue = "";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (empty($_POST["date"])) {
+            $dateErr = "You must select a date.";
+        } else{
+            $dateValue = test_input($_POST["date"]);
+        }
+    }
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+    ?>
 <div class="header-wrap">
 	<div class="logo">
 		<h1>Sphere Skiing</h1>
@@ -85,27 +107,33 @@
       <div class="panel">
       
       
-      <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+      <form method="post" action="successful_booking.php">
           <div class="contact-form mar-top30">
 
             <label> <span>Which day do you want to book a session for?<?php echo $dateErr; ?></span>
-            <input type="date" class="input_text" name="date" id="date" />
+            <input type="date" class="input_text" name="date" id="date" min="<?php echo date("Y-m-d"); ?>" value="<?php echo date('Y-m-d'); ?>" />
             </label>
 
             <label> <span>What time do you want to book a session for?</span>
-            <select class="input_text" name="time" id="time" style="width:270px" required>
-            <option value="nineam">9:00</option>
-            <option value="tenam">10:00</option>
-            <option value="elevenam">11:00</option>
-            <option value="twelvepm">12:00</option>
-            <option value="onepm">13:00</option>
-            <option value="twopm">14:00</option>
-            <option value="threepm">15:00</option>
-            <option value="fourpm">16:00</option></select>
+            <select class="input_text" name="starttime" id="starttime" style="width:270px" required>
+            <option value="9">9:00</option>
+            <option value="10">10:00</option>
+            <option value="11">11:00</option>
+            <option value="12">12:00</option>
+            <option value="13">13:00</option>
+            <option value="14">14:00</option>
+            <option value="14">15:00</option>
+            <option value="16">16:00</option></select>
+            </label>
+              
+            <label> <span>What time would you like to end your session?</span>
+            <select class="input_text" name="endtime" id="endtime" style="width:270px" required>
+            <option value="10">10:00</option>
+            </select>
             </label>
 
             <label> <span>How many people will be attending?</span>
-            <input type="number" class="input_text" name="attendees" id="attendees" min="1" max="99"/>
+            <input type="number" class="input_text" name="attendees" id="attendees" value="1" min="1" max="99"/>
             </label>
 
             <label><span>How would you describe your group's overall experience level?</span>
@@ -143,7 +171,7 @@
             <textarea class="message" name="comment" id="comment"></textarea></span>
             
             </label>
-            <input type="button" class="button" value="Submit Booking" />
+            <input type="submit" class="button" value="Submit Booking" />
           </div>
         </form>
         <div class="clearing"></div>

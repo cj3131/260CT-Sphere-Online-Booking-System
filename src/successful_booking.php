@@ -1,10 +1,8 @@
-
-
 <?php
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "sphere5_db";
+$dbname = "sphere6_db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -21,8 +19,8 @@ $attendees = $_POST["attendees"];
 $experience = $_POST["experience"];
 $comments = $_POST["comments"];
 $equipment = $_POST["equipment"];
-
-
+$instructor = $_POST["instructor"];
+$total_attendees = "";
 
 
 $sql = "SELECT * FROM sessions WHERE date = '{$date}' AND time = '{$time}'";
@@ -35,32 +33,54 @@ if ($result->num_rows > 0) {
     }		
 }
 else{
-        $sql = "INSERT INTO sessions (date, time) VALUES ('{$date}','{$time}')";
+    $sql = "INSERT INTO sessions (date, time) VALUES ('{$date}','{$time}')";
 
-        if ($conn->query($sql) === TRUE) {
-            //echo "New record created successfully";
+    if ($conn->query($sql) === TRUE) {
+        echo "New date/time session created successfully";
 
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-    
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
     $sql = "SELECT * FROM sessions WHERE date = '{$date}' AND time = '{$time}'";
+    $result = $conn->query($sql);		
+
+    if ($result->num_rows > 0) {	
+        // output data of each row		
+        while($row = $result->fetch_assoc()) {
+            $session_id = $row["session_id"];
+        }
+    }
+}
+
+$sql = "SELECT attendees FROM sessions WHERE session_id = '{$session_id}'";
 $result = $conn->query($sql);		
 
 if ($result->num_rows > 0) {		
     // output data of each row		
     while($row = $result->fetch_assoc()) {
-        $session_id = $row["session_id"];
+        $total_attendees = $attendees + $row["attendees"];
+        echo $total_attendees;
     }		
 }
-    }
 
+if ($total_attendees > "50") {
+    header("Location: home.html");
+    die();
+}
 
-$sql = "INSERT INTO bookings (session_id, attendees, experience, equipment) VALUES ('{$session_id}','{$attendees}','{$experience}','{$equipment}')";
-
+$sql = "UPDATE sessions SET attendees = '{$total_attendees}' WHERE session_id = '{$session_id}'";
+$result = $conn->query($sql);	
 if ($conn->query($sql) === TRUE) {
-    //echo "New record created successfully";
+    //echo "Attendees updated.";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
 
+
+$sql = "INSERT INTO bookings (session_id, attendees, experience, equipment, instructor) VALUES ('{$session_id}','{$attendees}','{$experience}','{$equipment}','{$instructor}')";
+if ($conn->query($sql) === TRUE) {
+    //echo "Booking successfully created";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
@@ -107,7 +127,7 @@ $conn->close();
             </div>
             
   
-                <p><label>Session has been successfully booked</label>
+                <p><label>Session has been successfully booked. There are this many people on the session: <?php echo $total_attendees; ?> </label>
             
             </form>
         
