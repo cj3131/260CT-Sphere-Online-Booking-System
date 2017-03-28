@@ -3,14 +3,19 @@
     document.getElementById('box').src = plink;
 }
 
+function disableIN()
+{
+    document.getElementById('inputID').style.display = "none";
+}
+
 function makeRequest(rType,rSelect)
 {
-    var data = getFormData(rSelect);
+    var rData = getFormData(rSelect);
     
     $.ajax({        
         type: rType,
         url: 'Controller_test.php',
-        data: {"selector": rSelect,"data": data},
+        data: {"selector": rSelect,"data": rData},
         dataType: 'json',      
         success: function(data)
         {
@@ -18,36 +23,47 @@ function makeRequest(rType,rSelect)
             {
                 for(var i in data)
                 {
-                    addTableEntry(data[i].staff_id,data[i].first_name,data[i].last_name,data[i].role,data[i].salary);
+                    addTableEntry(data[i].staff_id,data[i].first_name,data[i].last_name,data[i].role,data[i].salary,"staff_table");
                 }
             }
-            
+            else if(rSelect == "selEmp")
+            {
+                for(var i in data)
+                {
+                    addTableEntry(data[i].staff_id,data[i].first_name,data[i].last_name,data[i].role,data[i].salary,"staff_table2");
+                }
+            }
         }
     });
 }
 
 function getFormData(rSelect)
 {
-    var data = [];
+    var data = '{';
+    var json_data;
     
-    if(rSelect == "delEmp")
+    if(rSelect == "delEmp" || rSelect == "selEmp")
     {
-        data.push(document.getElementById("ID").value);
+        data += '"ID": "' + document.getElementById("ID").value + '"';
     }
     else if(rSelect == "addEmp")
     {
-        data.push(document.getElementById("Fname").value);
-        data.push(document.getElementById("Lname").value);
-        data.push(document.getElementById("Role").value);
-        data.push(document.getElementById("Salary").value);
+        data += '"Fname": "' + document.getElementById("Fname").value + '"';
+        data += ', "Lname": "' + document.getElementById("Lname").value + '"';
+        data += ', "Role": "' + document.getElementById("Role").value + '"';
+        data += ', "Salary": "' + document.getElementById("Salary").value + '"';
     }
     
-    return data;
+    data += '}';
+    
+    json_data = JSON.parse(data);
+    
+    return json_data;
 }
 
-function addTableEntry(id,fname,lname,role,salary)
+function addTableEntry(id,fname,lname,role,salary,tableID)
 {
-    var table = document.getElementById("staff_table");
+    var table = document.getElementById(tableID);
     var row = table.insertRow(table.rows.length);
     
     for(i = 0; i < 5; i++)
@@ -70,7 +86,6 @@ function addTableEntry(id,fname,lname,role,salary)
             case 4:
                 tmpCell.innerHTML = salary;
                 break;
-        }
-       
+        } 
     }
 }

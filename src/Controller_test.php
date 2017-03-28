@@ -2,16 +2,6 @@
 /*ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);*/
 
-if(isset($_GET) or isset($_POST))
-{
-    $cont = new emp_controller();
-    $cont->requestHandler();
-}
-else
-{
-    echo "You are not post or get so bugger off";
-}
-
 class emp_controller
 {
     // --- VARIABLES ---
@@ -39,6 +29,11 @@ class emp_controller
             $this->display();
         }
         
+        if($_GET["selector"] == "selEmp")
+        {
+            $this->select();
+        }
+        
         if($_POST["selector"] == "delEmp")
         {
             $this->DeleteDB();
@@ -47,7 +42,7 @@ class emp_controller
         if($_POST["selector"] == "addEmp")
         {
             $this->InsertDB();
-        }
+        }  
     }
      
     // --- PRIVATE ---
@@ -92,14 +87,54 @@ class emp_controller
         echo json_encode($array_ret);
     }
     
+    private function select()
+    {
+        $pData = $_GET["data"];
+        
+        $firstname = "";
+        $lastname = "";
+        //$ID = "";
+        
+        //$sql = "";
+        
+        /*if($pData["Fname"] !== 'undefined' and $pData["Lname"] !== 'undefined')
+        {
+            $firstname = $pData["Fname"];
+            $lastname = $pData["Lname"];
+            
+            $sql = "SELECT * FROM staff WHERE first_name = '{$firstname}' OR last_name = '{$lastname}'";
+        }
+        else if ($pData["ID"] !== 'undefined')*/
+        //{
+            $ID = $pData["ID"];
+            
+            $sql = "SELECT * FROM staff WHERE staff_id = '{$ID}'";
+        //}
+       
+        $result = $this->conn->query($sql);
+
+        $array_ret = Array();
+
+        if ($result->num_rows > 0) 
+        {
+            // output data of each row
+            while($row = $result->fetch_assoc()) 
+            {
+                array_push($array_ret,$row);
+            }
+        }
+
+        echo json_encode($array_ret);
+    }
+    
     private function insertDB() // VALIDATE POST
     {
         $pData = $_POST["data"];
         
-        $firstname = $pData[0];
-        $lastname = $pData[1];
-        $role = $pData[2];
-        $salary = $pData[3];
+        $firstname = $pData["Fname"];
+        $lastname = $pData["Lname"];
+        $role = $pData["Role"];
+        $salary = $pData["Salary"];
 
         $sql = "INSERT INTO staff (first_name,last_name,role,salary) VALUES ('{$firstname}','{$lastname}','{$role}','{$salary}')";
         if ($this->conn->query($sql) === FALSE) 
@@ -110,8 +145,7 @@ class emp_controller
     
     private function DeleteDB()
     {
-        
-        $ID = $_POST["data"][0];
+        $ID = $_POST["data"]["ID"];
     
         $sql = "DELETE FROM staff WHERE staff_id = '{$ID}'";
         if ($this->conn->query($sql) === FALSE) 
@@ -119,5 +153,15 @@ class emp_controller
             echo "Error: " . $sql . "<br>" . $this->conn->error;
         }
     }
+}
+
+if(isset($_GET["selector"]) or isset($_POST["selector"]))
+{
+    $cont = new emp_controller();
+    $cont->requestHandler();
+}
+else
+{
+    echo "Not POST or GET, bugger off";
 }
 ?>
