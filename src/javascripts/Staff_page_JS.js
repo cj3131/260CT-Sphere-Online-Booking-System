@@ -3,22 +3,46 @@
     document.getElementById('box').src = plink;
 }
 
-function getEmployeeList()
+function makeRequest(rType,rSelect)
 {
+    var data = getFormData(rSelect);
+    
     $.ajax({        
-        type:'GET',
-        //url: 'getEmployee.php',
+        type: rType,
         url: 'Controller_test.php',
-        data: {"selector" : "empList"},
+        data: {"selector": rSelect,"data": data},
         dataType: 'json',      
         success: function(data)
         {
-            for(var i in data)
+            if(rSelect == "empList")
             {
-                addTableEntry(data[i].staff_id,data[i].first_name,data[i].last_name,data[i].role,data[i].salary);
+                for(var i in data)
+                {
+                    addTableEntry(data[i].staff_id,data[i].first_name,data[i].last_name,data[i].role,data[i].salary);
+                }
             }
+            
         }
     });
+}
+
+function getFormData(rSelect)
+{
+    var data = [];
+    
+    if(rSelect == "delEmp")
+    {
+        data.push(document.getElementById("ID").value);
+    }
+    else if(rSelect == "addEmp")
+    {
+        data.push(document.getElementById("Fname").value);
+        data.push(document.getElementById("Lname").value);
+        data.push(document.getElementById("Role").value);
+        data.push(document.getElementById("Salary").value);
+    }
+    
+    return data;
 }
 
 function addTableEntry(id,fname,lname,role,salary)

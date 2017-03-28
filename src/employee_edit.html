@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/newstyles.css">
+        <script src="javascripts/Staff_page_JS.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <form id="addForm">
+            <div class="contact-form mar-top30">
+                
+                <h1>Add employee</h1>
+                
+                <label>
+                    <span>First Name</span>
+                    <input class="input_text" type="text" name="Staff_fname" id="Fname" autofocus>
+                </label>
+
+                <label>
+                    <span>Last name</span>
+                    <input class="input_text" type="text" name="Staff_lname" id="Lname">
+                </label>
+
+                <label>
+                    <span>Role</span>
+                    <select class="input_text" name="Role" id="Role">
+                        <option value="Manager">Manager</option>
+                        <option value="Reception">Reception</option>
+                        <option value="IT Support">IT Support</option>
+                        <option value="Staff">Staff</option>
+                    </select>
+                </label>
+                    
+                <label>
+                    <span>Salary(ph)</span>
+                    <input class="input_text" type="text" name="Salary" id="Salary">
+                </label>
+               
+                <input class="button" style="margin-left:0" type="submit" onclick="makeRequest('POST','addEmp')">
+            </div>
+        </form>
+
+        <form id="delForm">
+            <div class="contact-form mar-top30">
+                
+                <h1>Delete employee</h1>
+                
+                <label>
+                    <span>Staff ID</span>
+                    <input class="input_text" type="text" id="ID" autofocus>
+                </label>
+                <input class="button" style="margin-left:0" type="submit" onclick="makeRequest('POST','delEmp')">
+            </div>
+        </form>
+    </body>
+</html>

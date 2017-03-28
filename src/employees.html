@@ -3,8 +3,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="javascripts/Staff_page_JS.js"></script>
         <script>
-            $(document).ready(getEmployeeList()); 
-            // IF i ever want to make "refresh" button i need to clear table first
+            $(document).ready(makeRequest("GET","empList")); 
         </script>
         <style>
         table {

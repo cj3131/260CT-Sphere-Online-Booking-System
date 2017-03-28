@@ -5,60 +5,38 @@
     <title>TMPS00033</title>
     <link href="css/newstyles.css" rel="stylesheet" type="text/css" />
     <script src="javascripts/Staff_page_JS.js"></script>
-<style>
-    ul.navH{
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
-        border:ridge;
-        border-color:black;
-    }
+    <style>
+        ul.navV{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 20%;
+            background-color: #333;
+            float:left
+        }
 
-    ul.navH li{
-         float: left;
-    }
+        ul.navV a{
+            display: block;
+            color: white;
+            text-decoration: none;
+            cursor:pointer;
+        }
+        
+        ul.navV li{
+            margin:5px 5px 5px 5px;
+        }
 
-    ul.navH a{
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
-
-    ul.navV{
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        width: 15%;
-        background-color: #333;
-        float:left
-    }
-
-    ul.navV a{
-        display: block;
-        color: white;
-        padding: 8px 16px;
-        text-decoration: none;
-        cursor:pointer;
-    }
-
-    ul.navV span{
-        display: block;
-        color: white;
-        padding: 8px 16px;
-        text-decoration: none;
-        border-bottom:ridge;
-        border-color:grey;
-    }
-    .stf_frame{
-        width:84%;
-        height:750px;
-        border:hidden;
-    }
-</style>
+        ul.navV span{
+            display: block;
+            color: white;
+            text-decoration: none;
+        }
+        .stf_frame{
+            width:79%;
+            height:750px;
+            border:hidden;
+        }    
+    </style>
 </head>
 <body>
 
@@ -101,10 +79,10 @@
         <span>Only staff may use this page.</span>
     </div>
   	<div class="content">
-    	<ul class="navV">
+    	<ul class="navV" style="padding-top:0">
             <li><span>Features</span></li>
             <li><a onclick="change_stf_page('employees.html')">Employee list</a></li>
-            <li><a onclick="change_stf_page('employee_edit.php')">Edit Employees</a></li>
+            <li><a onclick="change_stf_page('employee_edit.html')">Edit Employees</a></li>
             <li><a onclick="change_stf_page('')">Edit Sessions</a></li>
         </ul>
 
