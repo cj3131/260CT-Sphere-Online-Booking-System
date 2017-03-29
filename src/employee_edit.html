@@ -69,7 +69,7 @@
                     <input class="button" style="margin-left:0" type="submit" onclick="disableIN(); makeRequest('GET','selEmp'); return false;">
                 </div>
                 <div>
-                    <table id="staff_table2">
+                    <table id="staff_table2" style="display:none">
                         <tr>
                             <th>ID</th>
                             <th>FirstName</th>
@@ -78,9 +78,10 @@
                             <th>Salary(ph)</th>
                         </tr>
                     </table>
+                    <button class="button" style="margin-left:0; display:none" id="delButton" onclick="makeRequest('POST','delEmp')">Delete</button>
+                    <button class="button" style="margin-left:0; display:none" id="cancelButton" onclick="">Cancel</button>
                 </div>
             </div>
         </form>
-        
     </body>
 </html>

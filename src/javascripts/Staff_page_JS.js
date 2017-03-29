@@ -6,6 +6,9 @@
 function disableIN()
 {
     document.getElementById('inputID').style.display = "none";
+    document.getElementById('staff_table2').style.display = "block";
+    document.getElementById('delButton').style.display = "inline";
+    document.getElementById('cancelButton').style.display = "inline";
 }
 
 function makeRequest(rType,rSelect)

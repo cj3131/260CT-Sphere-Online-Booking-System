@@ -91,25 +91,9 @@ class emp_controller
     {
         $pData = $_GET["data"];
         
-        $firstname = "";
-        $lastname = "";
-        //$ID = "";
-        
-        //$sql = "";
-        
-        /*if($pData["Fname"] !== 'undefined' and $pData["Lname"] !== 'undefined')
-        {
-            $firstname = $pData["Fname"];
-            $lastname = $pData["Lname"];
-            
-            $sql = "SELECT * FROM staff WHERE first_name = '{$firstname}' OR last_name = '{$lastname}'";
-        }
-        else if ($pData["ID"] !== 'undefined')*/
-        //{
-            $ID = $pData["ID"];
-            
-            $sql = "SELECT * FROM staff WHERE staff_id = '{$ID}'";
-        //}
+        $ID = $pData["ID"];
+
+        $sql = "SELECT * FROM staff WHERE staff_id = '{$ID}'";
        
         $result = $this->conn->query($sql);
 
@@ -135,11 +119,18 @@ class emp_controller
         $lastname = $pData["Lname"];
         $role = $pData["Role"];
         $salary = $pData["Salary"];
-
-        $sql = "INSERT INTO staff (first_name,last_name,role,salary) VALUES ('{$firstname}','{$lastname}','{$role}','{$salary}')";
-        if ($this->conn->query($sql) === FALSE) 
+        
+        $sql_compare = "SELECT * FROM staff WHERE first_name = '{$firstname}' AND last_name = '$lastname'";
+        $result = $this->conn->query($sql_compare);
+        $row = $result->fetch_assoc();
+        
+        if($row["first_name"] != $firstname and $row["last_name"] != $lastname)
         {
-            echo "Error: " . $sql . "<br>" . $this->conn->error;
+            $sql = "INSERT INTO staff (first_name,last_name,role,salary) VALUES ('{$firstname}','{$lastname}','{$role}','{$salary}')";
+            if ($this->conn->query($sql) === FALSE) 
+            {
+                echo "Error: " . $sql . "<br>" . $this->conn->error;
+            }
         }
     }
     
