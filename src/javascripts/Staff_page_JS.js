@@ -17,7 +17,7 @@ function makeRequest(rType,rSelect)
     
     $.ajax({        
         type: rType,
-        url: 'Controller_test.php',
+        url: 'Controller_staff.php',
         data: {"selector": rSelect,"data": rData},
         dataType: 'json',      
         success: function(data)
