@@ -2,7 +2,7 @@
 GLOBALS CLASSES 
 -------------------------------------------------*/
 *{padding:0; margin:0;}
-body{font-family:"Trebuchet MS"; font-size:14px; color:#ffed71; background:url(../images/bg1.jpg);}
+body{font-family:"Trebuchet MS"; font-size:14px; color:#ffed71; background:url(../images/background_texture.jpg);}
 img{border:none;}
 h1{ font-family:"Trebuchet MS"; font-size:22px; font-weight:normal;}
 h2{ font-family:"Trebuchet MS"; font-size:18px; font-weight:normal;}
@@ -56,7 +56,7 @@ SOCIAL MEDIA CLASSES
 BANNER CLASSES
 -------------------------------------------------*/
 .banner-wrap{width:960px; overflow:hidden; margin:0 auto;}
-.banner{ height:430px; background:url(../images/banner-bg.png) no-repeat;}
+.banner{ height:430px; background:url(../images/skier.jpg) no-repeat;}
 .banner .banner-img{ margin:0 auto; padding-top:54px; width:420px;}
 .shadow{ width:950px; height:38px; background:url(../images/shadow.png) no-repeat center; margin-bottom:45px;}
 
@@ -103,7 +103,7 @@ COLS CLASSES
 .leftcol .panel .title{ background:url(../images/line-bg.jpg) repeat-x bottom; padding-bottom:25px; margin-bottom:25px;}
 .leftcol .panel .title h1{ text-transform:uppercase;}
 .leftcol .panel .content h2{ color:#1e3246; padding-bottom:15px; padding-top:10px;}
-.leftcol .panel .title span{ font-size:18px; color:#1e3246;}
+.leftcol .panel .title span{ font-size:18px; color:#FFFFFF;}
 .leftcol .panel .content p{ padding-bottom:20px;}
 .leftcol .panel .content img{ float:left; margin-right:20px; background:#dd2900; padding:3px; border:#f32d00 solid 2px;}
 
@@ -139,7 +139,7 @@ CONTACT FORM CLASSS
 .address .panel { border:none; color:#9b9e9a}
 .address .panel .title h1 {  color:#d13f31; padding-bottom:10px;}
 .address .panel .content p span { color:#9b9e9a;}
-.drop_text{color: #000000 !important;}
+option{color: #000000 !important;}
 
 
 /*-------------------------------------------------
