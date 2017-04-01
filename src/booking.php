@@ -28,22 +28,53 @@
                 $("#endtime").html("<option value='17'>17:00</option>");
             }
         });
+        
+        //$("submit").click(function(){
+            //validate and process form here
+        //    var attendees = $("input#attendees").val();
+       // });
 });
 </script>
 
 <script>
-        function show_equipment(box) {
+    function show_equipment(box) {
 
-            var chboxs = document.getElementsByName("equipment");
-            var vis = "none";
-            for(var i=0;i<chboxs.length;i++) { 
-                if(chboxs[i].checked){
-                    vis = "block";
-                    break;
-                }
+        var chboxs = document.getElementsByName("equipment");
+        var vis = "none";
+        for(var i=0; i<chboxs.length; i++) { 
+            if(chboxs[i].checked){
+                vis = "block";
+                break;
             }
-            document.getElementById(box).style.display = vis;
-        } 
+        }
+        document.getElementById(box).style.display = vis;
+    }
+    
+    function form_submit(){
+        //on submit click:
+        //  run php to check tables for total attendees at that session
+        
+        <?php 
+        
+        
+        // $starttime, $endtime = getElementById(starttime), getElementById(endtime)
+        // SELECT total_attendees FROM sessions WHERE starttime = '{$starttime} AND endtime ='{endtime}'
+        // http://www.phpcodify.com/insert-data-in-php-using-jquery-ajax-without-page-refresh/
+        // https://code.tutsplus.com/tutorials/submit-a-form-without-page-refresh-using-jquery--net-59
+        // http://stackoverflow.com/questions/6065101/pass-value-from-html-form-to-php-without-submitting-the-form
+        // 
+        //  action="successful_booking.php"
+        
+        ?>
+        
+        //  if <50 attendees, run form action --- successful_booking.php
+        //      document.getElementById("myForm").submit();
+        //  if >50 attendees, show error message and display booking.php
+        //      alert "Too many attendees!"
+        //      DO NOT SUBMIT
+    }
+
+    
 </script>
 <link href="css/newstyles.css" rel="stylesheet" type="text/css" />
 </head>
@@ -52,6 +83,7 @@
     // define variables and set to empty values
     $dateErr = "";
     $dateValue = "";
+    
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($_POST["date"])) {
             $dateErr = "You must select a date.";
@@ -145,15 +177,15 @@
             </label>
             
           <div class="title">
-			  <h1></br>Additional requests </h1>
-			  <span>We offer the hire of one of our world-class skiing instructors along with </br>
+			  <h1><br>Additional requests </h1>
+			  <span>We offer the hire of one of our world-class skiing instructors along with <br>
              gear hire. Please indicate here if you require either of these services. </span></div>
 
             <label><span>Do you require an instructor during your ski session?
             <input type="checkbox" class="input_text" name="instructor" id="instructor" style="width:30px;"></span>
             </label>
 
-		  <label><span></br>Do you require equipment hire?
+		  <label><span><br>Do you require equipment hire?
             <input type="checkbox" class="input_text" name="equipment" id="equipment" style="width:30px;" onclick="show_equipment('gearselect')"></span>
             </label>
 
@@ -171,14 +203,16 @@
             <textarea class="message" name="comment" id="comment"></textarea></span>
             
             </label>
-            <input type="submit" class="button" value="Submit Booking" />
+            <input type="submit" name="submit" class="button" value="Submit Booking"/>
           </div>
         </form>
+          
         <div class="clearing"></div>
       </div>
   </div>	
   </div>
   
+    
   <div class="rightcol">
   	<div class="panel">
   		<div class="title"><h1>Please note that some sessions may be unavailable<br><br><br> </h1></div>

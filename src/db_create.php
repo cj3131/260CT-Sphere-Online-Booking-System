@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "sphere6_db";
+$dbname = "sphere7_db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 } 
 
 
-$sql = "CREATE DATABASE sphere6_db";
+$sql = "CREATE DATABASE sphere7_db";
 
 if ($conn->query($sql) === TRUE) {
     echo "Database created successfully  ";
@@ -52,7 +52,8 @@ if ($conn->query($sql) === TRUE) {
 $sql = "CREATE TABLE sessions (
 session_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
 date DATE NOT NULL,
-time VARCHAR(10) NOT NULL,
+starttime INT(2) NOT NULL,
+endtime INT(2) NOT NULL,
 total_attendees INT(2)
 )";
 if ($conn->query($sql) === TRUE) {
@@ -64,7 +65,7 @@ if ($conn->query($sql) === TRUE) {
 
 $sql = "CREATE TABLE bookings (
 bookings_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-attendees INT(3) NOT NULL,
+attendees INT(2) NOT NULL,
 user_id INT(6) UNSIGNED,
 session_id INT(6) UNSIGNED,
 experience VARCHAR(20),
