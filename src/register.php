@@ -4,46 +4,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Sphere Booking System</title>
     
+<script src="javascripts/Register_JS.js"></script>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
     function chgAction(num)
     {
         //document.getElementById("myForm").action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>";
-        document.getElementById("myForm").submit();
+        //document.getElementById("myForm").submit();
         
        
         
         if (num == 0){
             
             
-            document.getElementById("myForm").action = "registerPHP.php";
-            document.getElementById("myForm").submit();
+            
+            document.getElementById("SubmitButton").onclick = "makeRegisterRequest()";
+            document.getElementById("SubmitButton").type = "submit";
+            document.getElementById("SubmitButton").click();
             
         }
     }
 </script>
     
   <style>
-                table
-        {
-            table-layout: fixed;
-            width: 550px;
-        }
-        * {
-            box-sizing: border-box;
-        }
+        
         .error {color: #ffffff !important;}
-            
-        .left {
-            width: 35%;
-            float: left;
-            text-align: right;
-        }
-        .right {
-            width: 35%;
-            margin-left: 5%;
-            float: left;
-            text-align: right;
-        }
+           
   </style>
 <link href="css/newstyles.css" rel="stylesheet" type="text/css" />
 </head>
@@ -249,7 +235,7 @@
             <li><a href="booking.php">Book</a></li>
             <li><a href="register.php" class="active">Register</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="login.php">Log In</a></li>
+            <li><a href="staff_page.html">Log In</a></li>
             <li><a href="updatedetails.html">Account</a></li>
         </ul>
     </div>
@@ -277,7 +263,7 @@
       <div class="panel">
       
       
-      <form id= "myForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+      <form id= "myForm" method="POST">
           <div class="contact-form mar-top30">
 
             <label > <span>First Name * </span>
@@ -347,13 +333,10 @@
             <input type="text" name="postcode" class="input_text" value="<?php echo $postcode;?>">
             <Label class = "error"><?php echo $postcodeErr;?></Label>
             
-            <label><?php echo $errorCount == 0;?></label>
+            <label><span><?php echo $errorCount == 0; ?></span></label>
+              <label><span><?php echo $errorCount; ?></span></label>
             
-              <label><?php echo $errorCount;?></label>
-
-            
-            <input type="button" class="button" value="Register" onclick= "chgAction(<?php echo $errorCount ?>)"/>
-            
+            <input type="submit" class="button" value="Register" onclick= "makeRegisterRequest();return false;"/>
             </div>
 
         </form>

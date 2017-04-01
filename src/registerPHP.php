@@ -1,90 +1,92 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "sphere5_db";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+    $cont = new emp_controller();
+    $cont->insertDB();
+class emp_controller
+{
+    // --- VARIABLES ---
+    
+    private $conn = 0;
+    
+    // --- CONSTRUCTOR/DESTRUCTOR ---
+    
+    function __construct()
+    {
+        $this->connect_DB();
+    }
+    
+    function __destruct()
+    {
+        $this->close_DB();
+    }
+    
+    // --- PUBLIC ---
+    
+    // --- PRIVATE ---
+    
+    private function connect_DB()
+    {
+        // Connection details
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "sphere5_db";
+        
+        // Create connection
+        $this->conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($this->conn->connect_error) {
+            die("Connection failed: " . $this->conn->connect_error);
+        }
+    }
+    
+    private function close_DB()
+    {
+        $this->conn->close();
+    }
+  
+/*
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "sphere5_db";
 
-$firstname = $_POST["first_name"];
-$surname = $_POST["surname"];
-$email = $_POST["email"];
-$phonenumber = $_POST["phoneNum"];
-$dob = $_POST["DoB"];
-$password = $_POST["password"];
-$customer_address_one = $_POST["addLine1"];
-$customer_address_two = $_POST["addLine2"];
-$city = $_POST["city"];
-$county = $_POST["county"];
-$postcode = $_POST["postcode"];
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    } 
+*/
+    
+    public function insertDB() // VALIDATE POST
+    {
+        $pData = $_POST["data"];
+        
+        $firstname = $pData["first_name"];
+        $surname = $pData["surname"];
+        $email = $pData["email"];
+        $phonenumber = $pData["phoneNum"];
+        $dob = $pData["DoB"];
+        $password = $pData["password"];
+        $customer_address_one = $pData["addLine1"];
+        $customer_address_two = $pData["addLine2"];
+        $city = $pData["city"];
+        $county = $pData["county"];
+        $postcode = $pData["postcode"];
 
-echo "$firstname";
 
-$sql = "INSERT INTO members (first_name, last_name, email, phone_number, dob, address_one, address_two, city, country, postcode, password)
+        $sql = "INSERT INTO members (first_name, last_name, email, phone_number, dob, address_one, address_two, city, country, postcode, password)
 VALUES ('{$firstname}','{$surname}','{$email}','{$phonenumber}','{$dob}','{$customer_address_one}','{$customer_address_two}','{$city}',
 '{$county}','{$postcode}','{$password}')"; 
-
-if ($conn->query($sql) === TRUE) {
+        if ($this->conn->query($sql) === FALSE) 
+        {
+            echo "Error: " . $sql . "<br>" . $this->conn->error;
+        }
+    }
     
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
 }
+    
 
-
-
-$conn->close();
 
 ?>
-
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="css/StyleSheet.css">
-        <title>Online Booking System</title>
-        <style>
-        * {
-            box-sizing: border-box;
-        }
-        .left {
-            width: 35%;
-            float: left;
-            text-align: right;
-        }
-        .right {
-            width: 35%;
-            margin-left: 5%;
-            float: left;
-            text-align: right;
-        }
-        </style>
-    </head>
-    <body>
-        <ul class="navH">
-            <li><a href="home.html" title="home">Home</a></li>
-            <li><a href="booking.php" title="booking">Booking</a></li>
-            <li class="active"><a href="register.html" title="register">Register</a></li>
-            <li><a href="login.html" title="login">Log in</a></li>
-            <li><a href="updatedetails.html" title="update">Update Details</a></li>
-        </ul>
-    
-        <form method="post">
-            
-            <div class= "title">
-                <h1>Register</h1>
-            </div>
-            
-  
-                <p><label>Well done you have registered you can now login</label>
-            
-            </form>
-        
-        <footer>
-            <a href="contact.html">Contact us</a> <a href="https://www.paypal.me/CallumHuntington">Send us money</a> <a href="about.html">About</a>
-        </footer>
-            
-    </body>
-</html>
