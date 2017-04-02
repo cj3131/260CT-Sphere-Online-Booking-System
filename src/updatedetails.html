@@ -2,7 +2,7 @@
 
 <html>
 	
-	<head>
+	<head> <!-- Set screen title and size -->
 		<link rel="stylesheet" type="text/css" href="css/stylesheet1.css">
 		<title>Online Booking System</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +10,10 @@
 	
 	<body>
 		
-		<h1 class="header">Update User Details</h1>
+		<h1 class="header">Update User Details</h1> <!-- Set header -->
 		
 		<br />
-		<ul class="navT">
+		<ul class="navT"> <!-- Set Navigation bar -->
 			<li><a href="home.html" title="home">Home</a></li>
 			<li><a href="booking.html" title="booking">Booking</a></li>
 			<li><a href="register.html" title="register">Register</a></li>
@@ -21,9 +21,11 @@
 			<li class="active"><a href="home.html" title="updatedetails">Update Details</a></li>
 		</ul>
 		
-		<div class = "left">
+		<div class = "left"> <!-- Place input form in div -->
 			
-            <form method="post" action="userinfo.php">
+            <form method="post" action="userinfo.php"> <!-- Initialise form -->
+			<!-- Set labels and input fields -->
+			<!-- id="" holds the value that the Javascript controller refers to -->
 			<p><label>First Name</label>
 			<input class="input" type="text" name="customer_firstname" id="firstname" value="Ivo" autofocus></p>
 			<p><label>Surname</label>
@@ -40,6 +42,7 @@
 			<input class="input" type="password" name="C_password" id="C_password"></p>
 			</form>
 			
+			<!-- Initialise empty paragraphs where errors are displayed -->
             <p id="textcheck" style="color: red;"></p>
 			<p id="surnamecheck" style="color: red;"></p>
             <p id="prefixcheck" style="color:red;"></p>
@@ -49,10 +52,10 @@
             <p id="cansave" style="color:green;"></p>
             
             
-			
+			<!-- Update button (also runs controller) -->
 			<p><button style="border-radius: 5px;" onclick="entryvalidation()">Update</button></p>
 
-            <script>
+            <script> <!-- Javascript controller code -->
                 function entryvalidation() {
                     
 
@@ -159,6 +162,8 @@
                         cansave = 0;
                     }
 
+					//variable cansave is equal to 1 or 0
+					//if cansave=1 Input fields have been properly filled
 					if (cansave == 0) {
 						document.getElementById("cansave").innerHTML = "Can NOT Save!";
 						document.getElementById("cansave").style.color = "blue";
@@ -174,7 +179,7 @@
 		</div>
 	</body>	
 	
-	<footer>	
+	<footer> <!-- Initialises page footer -->
 		<a href="contact.html">Contact us</a> <a href="https://www.paypal.me/CallumHuntington">Send us money</a> <a href="about.html">About</a>
 	</footer>
 	
