@@ -11,12 +11,8 @@
     {
         //document.getElementById("myForm").action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>";
         //document.getElementById("myForm").submit();
-        
-       
-        
+
         if (num == 0){
-            
-            
             
             document.getElementById("SubmitButton").onclick = "makeRegisterRequest()";
             document.getElementById("SubmitButton").type = "submit";
@@ -187,14 +183,9 @@
                     
               }
               $errorCount = $errorCount - 1;
-    
-           
-       
+
     }
-    
-            
-    
-        
+
             function test_date($Date){
                 $DateOK = false;
                 $todayDate = date("Y-m-d");
@@ -205,7 +196,6 @@
                 return $DateOK;
             }
                 
-        
             function test_password($Password, $ComPassword){
                 $PasswordOK = false;
                 if($Password == $ComPassword){
@@ -332,9 +322,6 @@
             <label><span>Postcode *</span></label>
             <input type="text" name="postcode" class="input_text" value="<?php echo $postcode;?>">
             <Label class = "error"><?php echo $postcodeErr;?></Label>
-            
-            <label><span><?php echo $errorCount == 0; ?></span></label>
-              <label><span><?php echo $errorCount; ?></span></label>
             
             <input type="submit" class="button" value="Register" onclick= "makeRegisterRequest();return false;"/>
             </div>
