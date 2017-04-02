@@ -200,7 +200,7 @@
         </div>
 
 		  <label> <span><br>Additional Comments
-            <textarea class="message" name="comment" id="comment"></textarea></span>
+            <textarea class="message" name="comment" id="comment" placeholder="Enter any comments you have regarding instructors or additional requirements here."></textarea></span>
             
             </label>
             <input type="submit" name="submit" class="button" value="Submit Booking"/>
