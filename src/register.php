@@ -38,16 +38,17 @@
     
             $errorCount = 1;
             
-
+            
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                testFirstName();
               if (empty($_POST["first_name"])) {
                 $first_nameErr = "First name is required";
                 $errorCount = $errorCount + 1;
               } else {
                 $first_name = test_input($_POST["first_name"]);
-                // check if name only contains letters and whitespace
-                if (!preg_match("/^[a-zA-Z ]*$/",$first_name)) {
-                  $first_nameErr = "Only letters and white space allowed";
+                // check if name only contains letters
+                if (!preg_match("/^[a-zA-Z]*$/",$first_name)) {
+                  $first_nameErr = "Only letters allowed";
                   $errorCount = $errorCount + 1;
                 }
               }
@@ -61,7 +62,7 @@
                 $surname = test_input($_POST["surname"]);
                 // check if name only contains letters and whitespace
                 if (!preg_match("/^[a-zA-Z ]*$/",$surname)) {
-                  $surnameErr = "Only letters and white space allowed"; 
+                  $surnameErr = "Only letters allowed"; 
                   $errorCount = $errorCount + 1;
                  }
               }
@@ -185,6 +186,37 @@
               $errorCount = $errorCount - 1;
 
     }
+            function Firstname($string){
+                if (empty($string)) {
+                $first_nameErr = "First name is required";
+                return false;
+              } else {
+                $first_name = $string;
+                // check if name only contains letters and whitespace
+                if (!preg_match("/^[a-zA-Z]*$/",$string)) {
+                    $first_nameErr = "Only letters and white space allowed";
+                    return false;
+                } else {
+                    $first_nameErr = "First name is allowed";
+                    return True;
+                }
+            }
+            }
+    
+            function testFirstName(){
+                $myfile = fopen("testutput.txt", "w") or die("Unable to open file!");
+                $tests = array("Tom", "tom", "T0m", "123", "TOM", "", " ", "T om");
+                for ($i = 0; $i <= sizeof($tests); $i++) {
+                    if (Firstname($tests[$i]) == true){
+                        $txt = "'$tests[$i]' : Correct\n";
+                        fwrite($myfile, $txt);
+                    } else {
+                        $txt = "'$tests[$i]' : Error\n";
+                        fwrite($myfile, $txt);
+                    }
+                }
+                fclose($myfile);
+            }
 
             function test_date($Date){
                 $DateOK = false;

@@ -1,0 +1,9 @@
+'Tom' : Correct
+'tom' : Correct
+'T0m' : Error
+'123' : Error
+'TOM' : Correct
+'' : Error
+' ' : Error
+'T om' : Error
+'' : Error

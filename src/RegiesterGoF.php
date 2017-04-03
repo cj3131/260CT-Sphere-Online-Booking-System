@@ -20,12 +20,7 @@ class UserFactory {
 }
 
 abstract class AbstractUser {
-    abstract function getname();
-    abstract function getemail();
-}
-
-class FreeUserMember extends AbstractUser {
-        $pData = $_POST["data"];
+    $pData = $_POST["data"];
     
         private $firstname;
         private $surname;
@@ -52,6 +47,12 @@ class FreeUserMember extends AbstractUser {
         $this->city = $pData["city"];
         $this->county = $pData["county"];
         $this->postcode = $pData["postcode"];
+    abstract function getname();
+    abstract function getemail();
+}
+
+class FreeUserMember extends AbstractUser {
+        
             
     }
     function getname() {return $this->firstname;}
@@ -59,35 +60,7 @@ class FreeUserMember extends AbstractUser {
 }
 
 class LoyaltyMember extends AbstractUser {
-    
-        $pData = $_POST["data"];
-    
-        private $firstname;
-        private $surname;
-        private $email;
-        private $phonenumber;
-        private $dob;
-        private $password;
-        private $customerAdd1;
-        private $customerAdd2;
-        private $city;
-        private $county;
-        private $postcode;
-    
-    function __construct() {
-        
-        $this->firstname = $pData["first_name"];
-        $this->surname = $pData["surname"];
-        $this->email = $pData["email"];
-        $this->phonenumber = $pData["phoneNum"];
-        $this->dob = $pData["DoB"];
-        $this->password = $pData["password"];
-        $this->customerAdd1 = $pData["addLine1"];
-        $this->customerAdd2 = $pData["addLine2"];
-        $this->city = $pData["city"];
-        $this->county = $pData["county"];
-        $this->postcode = $pData["postcode"];
-            
+  
     }
     function getname() {return $this->firstname;}
     function getTitle() {return $this->email;}
