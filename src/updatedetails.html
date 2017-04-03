@@ -1,78 +1,186 @@
 <!DOCTYPE html>
+
 <html>
-    
-	<head>
-        <link rel="stylesheet" type="text/css" href="css/StyleSheet.css">
-        <title>Online Booking System</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-        * {
-            box-sizing: border-box;
-        }
-        .left {
-            width: 45%;
-            float: left;
-            text-align: right;
-        }
-        </style>
-    </head>
-    
+	
+	<head> <!-- Set screen title and size -->
+		<link rel="stylesheet" type="text/css" href="css/stylesheet1.css">
+		<title>Online Booking System</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	
 	<body>
-    <form method="get" action="/html/codes/html_form_handler.cfm">
-
-        <ul class="navH">
-            <li><a href="home.html" title="home">Home</a></li>
-            <li><a href="booking.php" title="booking">Booking</a></li>
-            <li><a href="register.html" title="register">Register</a></li>
-            <li><a href="login.html" title="login">Log in</a></li>
-            <li class="active"><a href="updatedetails.html" title="update">Update Details</a></li>
-        </ul>
-
-        <div class= "title">
-            <h1>Update Details</h1>
-            <figure>
-              <figcaption></figcaption>
-            </figure>
-        </div>
-
-        <div class= "left">
+		
+		<h1 class="header">Update User Details</h1> <!-- Set header -->
+		
+		<br />
+		<ul class="navT"> <!-- Set Navigation bar -->
+			<li><a href="home.html" title="home">Home</a></li>
+			<li><a href="booking.html" title="booking">Booking</a></li>
+			<li><a href="register.html" title="register">Register</a></li>
+			<li><a href="login.html" title="login">Login</a></li>
+			<li class="active"><a href="home.html" title="updatedetails">Update Details</a></li>
+		</ul>
+		
+		<div class = "left"> <!-- Place input form in div -->
+			
+            <form method="post" action="userinfo.php"> <!-- Initialise form -->
+			<!-- Set labels and input fields -->
+			<!-- id="" holds the value that the Javascript controller refers to -->
+			<p><label>First Name</label>
+			<input class="input" type="text" name="customer_firstname" id="firstname" value="Ivo" autofocus></p>
+			<p><label>Surname</label>
+			<input class="input" type="text" name="customer_surname" id="surname" value="Iliev"></p>
+			<p><label>Phone Number</label>
+            <label style="color:grey;">+</label>
+            <input type="number" name="prefix" id="prefix" style="width:30px;" value="44"/>
+			<input class="input" type="text" name="phone_number" id="number" value="123456789"></p>
+			<p><label>Email Adress</label>
+			<input class="input" type="email" name="email_adress" id="email" value="ex@smth.smth"></p>
+			<p><label>New Password<label id="passwordcomplexity"></label></label>
+			<input class="input" type="password" name="password" id="password"></p>
+			<p><label>Confirm New Password</label>
+			<input class="input" type="password" name="C_password" id="C_password"></p>
+			</form>
+			
+			<!-- Initialise empty paragraphs where errors are displayed -->
+            <p id="textcheck" style="color: red;"></p>
+			<p id="surnamecheck" style="color: red;"></p>
+            <p id="prefixcheck" style="color:red;"></p>
+            <p id="numbercheck" style="color:red;"></p>
+            <p id="emailcheck" style="color: red;"></p>
+            <p id="passwordcheck" style="color: red;"></p>
+            <p id="cansave" style="color:green;"></p>
             
-            <p>
-            <label>First Name</label>
-            <input type="text" name="customer_firstname" placeholder="Ivo" autofocus style="width: 165px">
-            </p>
-            <p>
-            <label>Surname</label>
-            <input type="text" name="customer_surname" placeholder="Iliev" style="width: 165px">
-            </p>
-            <p>
-            <label>Phone Number</label>
-            <input type="number" name="phone_number" placeholder="0044 1234 5678" style="width: 165px">
-            </p>
-            <p>
-            <label>Email address</label>
-            <input type="email" name="email_adress" placeholder="example@uni.coventry.ac.uk" style="width: 165px">
-            </p>
-            <p>
-            <label for="DoB">Date Of Birth</label>
-            <input id="DoB" type="date" style ="width: 165px">
-            </p>
-            <p>
-            <label>New Password</label>
-            <input type="password" name="password" style="width: 165px">
-            </p>
-            <p>
-            <label>Comfirm New Password</label>
-            <input type="password" name="C_password" style="width: 165px">
-            </p>
-            <p>
-            <button><a href="detailssaved.html" title="detailssaved">Save Details</button>
-            </p>
-        </div>
+            
+			<!-- Update button (also runs controller) -->
+			<p><button style="border-radius: 5px;" onclick="entryvalidation()">Update</button></p>
 
-    </form>
-    <footer>
-            <a href="contact.html">Contact us</a> <a href="https://www.paypal.me/CallumHuntington">Send us money</a> <a href="about.html">About</a>
-        </footer>
-</body>
+            <script> <!-- Javascript controller code -->
+                function entryvalidation() {
+                    
+
+                    //variables below read data from html form
+                    var name = document.getElementById("firstname");
+                    var namelength = name.value.length;
+
+                    var surname = document.getElementById("surname");
+                    var surnamelength = surname.value.length;
+
+                    var prefix = document.getElementById("prefix");
+                    var number = document.getElementById("number");
+
+                    var mail = document.getElementById("email");
+
+                    var pass = document.getElementById("password");
+                    var cpass = document.getElementById("C_password");
+                    var passlength = pass.value.length;
+
+                    //commands below set the predefined error messages to None
+                    document.getElementById("textcheck").innerHTML = "";
+                    document.getElementById("surnamecheck").innerHTML = "";
+                    document.getElementById("prefixcheck").innerHTML = "";
+                    document.getElementById("numbercheck").innerHTML = "";
+                    document.getElementById("emailcheck").innerHTML = "";
+                    document.getElementById("passwordcheck").innerHTML = "";
+                    document.getElementById("passwordcomplexity").innerHTML = "";
+                    document.getElementById("cansave").innerHTML = "";
+
+                    var cansave = 1; //If this value is 1, code will save data
+
+                    //check name input
+                    if (namelength < 1) {
+                        document.getElementById("textcheck").innerHTML = "Name has not been filled!";
+                        cansave = 0;
+                    }
+                    else {
+                        if (!/^[A-Za-z]+$/.test(name.value)) {
+                            document.getElementById("textcheck").innerHTML = "Name can only contain letters!";
+                            cansave = 0;
+                        }
+                    }
+
+                    //check surname input
+                    if (surnamelength < 1) {
+                        document.getElementById("surnamecheck").innerHTML = "Surname has not been filled!";
+                        cansave = 0;
+                    }
+                    else {
+                        if (!/^[A-Za-z]+$/.test(surname.value)) {
+                            document.getElementById("surnamecheck").innerHTML = "Surname can only contain letters!";
+                            cansave = 0;
+                        }
+                    }
+
+                    //check phone number prefix
+                    if (prefix.value.length < 2) {
+                        document.getElementById("prefixcheck").innerHTML = "Phone area prefix too short!";
+                        cansave = 0;
+                    }
+                    if (prefix.value.length > 5) {
+                        document.getElementById("prefixcheck").innerHTML = "Phone area prefix too long!";
+                        cansave = 0;
+                    }
+					
+
+                    //check phone number
+                    if (number.value.length < 5) {
+                        document.getElementById("numbercheck").innerHTML = "Phone number too short!";
+                        cansave = 0;
+                    }
+                    if (number.value.length > 10) {
+                        document.getElementById("numbercheck").innerHTML = "Phone number too long!";
+                        cansave = 0;
+                    }
+
+                    //check email
+                    if (mail.value.length < 3) {
+                        document.getElementById("emailcheck").innerHTML = "Email too short to be real!";
+                        cansave = 0;
+                    }
+                    else if (mail.value.indexOf("@") < 0) {
+                        document.getElementById("emailcheck").innerHTML = "Invalid email format!";
+						cansave = 0;
+                    }
+
+                    //output password complexity
+                    if (passlength < 1) {
+                        document.getElementById("passwordcheck").innerHTML = "Please enter a password!";
+                        cansave = 0;
+                    }
+                    else if (passlength < 6) {
+                        document.getElementById("passwordcomplexity").style.color = "red";
+                        document.getElementById("passwordcomplexity").innerHTML = " weak";
+                    }
+                    else if (passlength > 6) {
+                        document.getElementById("passwordcomplexity").style.color = "green";
+                        document.getElementById("passwordcomplexity").innerHTML = " good";
+                    }
+
+                    //check if passwords match
+                    if (pass.value != cpass.value) {
+                        document.getElementById("passwordcheck").innerHTML = "Passwords do not match!";
+                        cansave = 0;
+                    }
+
+					//variable cansave is equal to 1 or 0
+					//if cansave=1 Input fields have been properly filled
+					if (cansave == 0) {
+						document.getElementById("cansave").innerHTML = "Can NOT Save!";
+						document.getElementById("cansave").style.color = "blue";
+					}
+					else if (cansave == 1) {
+						document.getElementById("cansave").innerHTML = "Can Save!";
+						document.getElementById("cansave").style.color = "green";
+					}
+                }
+            </script>			
+
+		
+		</div>
+	</body>	
+	
+	<footer> <!-- Initialises page footer -->
+		<a href="contact.html">Contact us</a> <a href="https://www.paypal.me/CallumHuntington">Send us money</a> <a href="about.html">About</a>
+	</footer>
+	
 </html>

@@ -1,0 +1,94 @@
+div {
+	background-color:#aed7e3;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+html, body, ifram {height: 95%;}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color:#F0F8FF;
+	margin: 0px;
+	font-style: normal;
+	font-weight: 200;
+}
+
+.header {
+	font-size: 40px;
+	text-align: left;
+	margin: 10px;
+	margin-bottom: 0px;
+	border: none;
+	border-radius: 25px;
+	border-color: black;
+	padding: 10px;
+	
+}
+
+ul.navT {
+	list-style-type: none;
+	margin: 10px;
+	margin-top: 0px;
+	margin-right: -10px;
+	padding: 0px;
+	overflow: hidden;
+	background-color: #C0C0C0;
+	border: ridge;
+	border-right: none;
+	border-color: black;
+	border-radius: 5px;
+}
+
+ul.navT li{
+	float: left;
+}
+
+ul.navT a{
+	display: block;
+	color: #666666;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+.active {
+	background-color: #d9d9d9;
+	border-left: none;
+	border-right: none;
+	border-color: white;
+}
+
+.left {
+	width: text-align;
+	margin-left: 5%;
+	padding-left: 10px;
+	padding-right: 10px;
+	float: left;
+	text-align: right;
+}
+
+.bottom {
+	width: 100%;
+	bottom: 0px;
+	left: 0px;
+	border-top: solid;
+	border-top-color: black;
+	background-color: grey;
+	padding: 10px;
+}
+	
+footer {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	border-top: ridge;
+	border-top-color: black;
+	background-color: grey;
+	padding: 10px;
+}
+
+.input {
+	width: 165px;
+}
