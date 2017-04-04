@@ -2,25 +2,25 @@
 /*ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);*/
 
+require("Staff_Entities.php");
+
 class emp_controller
 {
     // --- VARIABLES ---
     
     private $conn = 0;
+    private $empFactory = 0;
+    private $employeeList = 0;
     
-    // --- CONSTRUCTOR/DESTRUCTOR ---
+    // --- CONSTRUCTOR ---
     
     function __construct()
     {
-        $this->connect_DB();
+        $this->empFactory = new EmployeeFactory();
+        $this->employeeList = $this->empFactory->getAllEmployees();
     }
     
-    function __destruct()
-    {
-        $this->close_DB();
-    }
-    
-    // --- PUBLIC ---
+    // --- Handler ---
 
     public function requestHandler()
     {
@@ -47,72 +47,44 @@ class emp_controller
      
     // --- PRIVATE ---
     
-    private function connect_DB()
-    {
-        // Connection details
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "sphere5_db";
-        
-        // Create connection
-        $this->conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
-        }
-    }
-    
-    private function close_DB()
-    {
-        $this->conn->close();
-    }
-    
     private function display()
     {       
-        $sql = "SELECT * FROM staff";
-        $result = $this->conn->query($sql);
-
-        $array_ret = Array();
-
-        if ($result->num_rows > 0) 
+        $array_ret = Array();     
+        foreach($this->employeeList as $obj)
         {
-            // output data of each row
-            while($row = $result->fetch_assoc()) 
-            {
-                array_push($array_ret,$row);
-            }
+            $tmp = Array("staff_id" => "{$obj->getID()}",
+                         "first_name" => "{$obj->getFname()}",
+                         "last_name" => "{$obj->getLname()}",
+                         "role" => "{$obj->getRole()}",
+                         "salary" => "{$obj->getSalary()}");
+            array_push($array_ret,$tmp);
         }
-
         echo json_encode($array_ret);
     }
     
     private function select()
     {
-        $pData = $_GET["data"];
-        
-        $ID = $pData["ID"];
-
-        $sql = "SELECT * FROM staff WHERE staff_id = '{$ID}'";
-       
-        $result = $this->conn->query($sql);
-
+        $ID = $_GET["data"]["ID"];
         $array_ret = Array();
-
-        if ($result->num_rows > 0) 
+        foreach($this->employeeList as $obj)
         {
-            // output data of each row
-            while($row = $result->fetch_assoc()) 
+            if($ID == $obj->getID())
             {
-                array_push($array_ret,$row);
+                $tmp = Array("staff_id" => "{$obj->getID()}",
+                             "first_name" => "{$obj->getFname()}",
+                             "last_name" => "{$obj->getLname()}",
+                             "role" => "{$obj->getRole()}",
+                             "salary" => "{$obj->getSalary()}");
+                array_push($array_ret,$tmp);
             }
         }
-
         echo json_encode($array_ret);
     }
     
     private function insertDB() // VALIDATE POST
     {
+        //($type, $fname, $lname, $salary, $dbSave = false, $ID = NULL) 
+        
         $pData = $_POST["data"];
         
         $firstname = $pData["Fname"];
@@ -120,28 +92,31 @@ class emp_controller
         $role = $pData["Role"];
         $salary = $pData["Salary"];
         
-        $sql_compare = "SELECT * FROM staff WHERE first_name = '{$firstname}' AND last_name = '$lastname'";
-        $result = $this->conn->query($sql_compare);
-        $row = $result->fetch_assoc();
+        $inList = false;
         
-        if($row["first_name"] != $firstname and $row["last_name"] != $lastname)
+        foreach($this->employeeList as $obj)
         {
-            $sql = "INSERT INTO staff (first_name,last_name,role,salary) VALUES ('{$firstname}','{$lastname}','{$role}','{$salary}')";
-            if ($this->conn->query($sql) === FALSE) 
+            if($firstname == $obj->getFname() and $lastname == $obj->getLname())
             {
-                echo "Error: " . $sql . "<br>" . $this->conn->error;
+                $inList = true;
             }
+        }
+        
+        if ($inList == false)
+        {
+            $this->empFactory->makeEmployee($Role,$firstname,$lastname,$salary,true,NULL);
         }
     }
     
     private function DeleteDB()
     {
         $ID = $_POST["data"]["ID"];
-    
-        $sql = "DELETE FROM staff WHERE staff_id = '{$ID}'";
-        if ($this->conn->query($sql) === FALSE) 
+        foreach($this->employeeList as $obj)
         {
-            echo "Error: " . $sql . "<br>" . $this->conn->error;
+            if($ID == $obj->getID())
+            {
+                $this->empFactory->DeleteDB($ID);
+            }
         }
     }
 }
