@@ -1,9 +1,9 @@
 <?php
-/*ini_set('display_errors', 'On');
-error_reporting(E_ALL | E_STRICT);*/
 
+// Serves as Include but, if it's not avaible it will give error 
 require("Staff_Entities.php");
 
+// Employee Controller
 class emp_controller
 {
     // --- VARIABLES ---
@@ -12,7 +12,7 @@ class emp_controller
     private $employeeList = 0;
     
     // --- CONSTRUCTOR ---
-    
+    // Prepares Employee factory for work
     function __construct()
     {
         $this->empFactory = new EmployeeFactory();
@@ -20,7 +20,7 @@ class emp_controller
     }
     
     // --- Handler ---
-
+    // Handles different types of actions to execute
     public function requestHandler()
     {
         if($_GET["selector"] == "empList")
@@ -46,6 +46,10 @@ class emp_controller
      
     // --- PRIVATE ---
     
+    // Display function
+    // Gets all current employees
+    // Encodes from objects to JSON type file
+    // Sends it back to Javascript fuction which originaly called this PHP
     private function display()
     {       
         $array_ret = Array();     
@@ -61,6 +65,8 @@ class emp_controller
         echo json_encode($array_ret);
     }
     
+    // Get single employee,
+    // Acts very similarly to Display
     private function select()
     {
         $ID = $_GET["data"]["ID"];
@@ -80,10 +86,10 @@ class emp_controller
         echo json_encode($array_ret);
     }
     
-    private function insertDB() // VALIDATE POST
+    // Inserts new employee to database
+    private function insertDB() 
     {
-        //($type, $fname, $lname, $salary, $dbSave = false, $ID = NULL) 
-        
+        // unpack the data from POST request
         $pData = $_POST["data"];
         
         $firstname = $pData["Fname"];
@@ -93,6 +99,7 @@ class emp_controller
         
         $inList = false;
         
+        // Check if the employee exists
         foreach($this->employeeList as $obj)
         {
             if($firstname == $obj->getFname() and $lastname == $obj->getLname())
@@ -101,16 +108,18 @@ class emp_controller
             }
         }
         
+        // If it doesn't exist, add it
         if ($inList == false)
         {
-            $this->empFactory->makeEmployee($Role,$firstname,$lastname,$salary,true,NULL);
+            $this->empFactory->makeEmployee($role,$firstname,$lastname,$salary,true,NULL);
         }
     }
     
+    // Delete Employee 
     private function DeleteDB()
     {
         $ID = $_POST["data"]["ID"];
-        foreach($this->employeeList as $obj)
+        foreach($this->employeeList as $key => $obj)
         {
             if($ID == $obj->getID())
             {
@@ -120,6 +129,8 @@ class emp_controller
     }
 }
 
+// Check if POST and GET came with set selector value
+// To prevent outside access to operations
 if(isset($_GET["selector"]) or isset($_POST["selector"]))
 {
     $cont = new emp_controller();

@@ -1,8 +1,10 @@
-﻿function change_stf_page(plink)
+// Change Iframe sources to change to different pages
+function change_stf_page(plink)
 {
     document.getElementById('box').src = plink;
 }
 
+// Disable/Enable certain elements when user imputs employee ID for deletion
 function disableIN()
 {
     document.getElementById('inputID').style.display = "none";
@@ -11,17 +13,19 @@ function disableIN()
     document.getElementById('cancelButton').style.display = "inline";
 }
 
+// Make request to controller
 function makeRequest(rType,rSelect)
 {
     var rData = getFormData(rSelect);
     
     $.ajax({        
-        type: rType,
-        url: 'Staff_Controller.php',
-        data: {"selector": rSelect,"data": rData},
-        dataType: 'json',      
+        type: rType, // what type of request POST or GET
+        url: 'Staff_Controller.php', 
+        data: {"selector": rSelect,"data": rData}, // Data to pass to the php file
+        dataType: 'json', // what kind of data to expect to get back 
         success: function(data)
         {
+            // To Display employeeList it adds table entry to html page
             if(rSelect == "empList")
             {
                 for(var i in data)
@@ -29,6 +33,7 @@ function makeRequest(rType,rSelect)
                     addTableEntry(data[i].staff_id,data[i].first_name,data[i].last_name,data[i].role,data[i].salary,"staff_table");
                 }
             }
+            // Add single entry for Deletion form
             else if(rSelect == "selEmp")
             {
                 for(var i in data)
@@ -40,8 +45,10 @@ function makeRequest(rType,rSelect)
     });
 }
 
+// Data formating, preparation to send it to PHP file, encodes it to JSON format
 function getFormData(rSelect)
 {
+    // Constructing it as a String
     var data = '{';
     var json_data;
     
@@ -59,11 +66,13 @@ function getFormData(rSelect)
     
     data += '}';
     
+    // Parse it to make JSON
     json_data = JSON.parse(data);
     
     return json_data;
 }
 
+// Javascript function to add entrys to HTML table
 function addTableEntry(id,fname,lname,role,salary,tableID)
 {
     var table = document.getElementById(tableID);

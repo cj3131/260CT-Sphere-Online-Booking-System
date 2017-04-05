@@ -1,8 +1,7 @@
 <?php
 
-class EmployeeFactory 
+class BookingFactory 
 {
-    // --- Database Connection ---
     private $conn = 0;
     
     function __construct()
@@ -34,15 +33,10 @@ class EmployeeFactory
         $this->conn->close();
     }
     
-    // --- Public functions ---
-    
-    // Saves data to Database and creates, equivalent Employee object for later use
-    function makeEmployee($type, $fname, $lname, $salary, $dbSave = false, $ID = NULL) 
+    function makeBooking($type, $fname, $lname, $salary, $dbSave = false, $ID = NULL) 
     {
         $employee = 0;
-        // There are 2 options:
-        // 1. Get the employees from database and create new employee object
-        // 2. Add new employee to database and create new employee object
+        
         if($dbSave == true)
         {
             $sql = "INSERT INTO staff (first_name,last_name,role,salary) VALUES ('{$fname}','{$lname}','{$type}','{$salary}')";
@@ -54,7 +48,6 @@ class EmployeeFactory
             $ID = (string)$this->conn->insert_id; 
         }
         
-        // Decides what type of employee it is
         switch ($type) 
         {
             case "Manager":
@@ -76,33 +69,26 @@ class EmployeeFactory
         return $employee;
     }
     
-    // Bulk creation of all employees
-    // Multiple calls of makeEmployee
     function getAllEmployees()
     {
-        // get all data from database
         $sql = "SELECT * FROM staff";
         $result = $this->conn->query($sql);
+
         $array_ret = Array();
-           
-        // check if not empty
+
         if ($result->num_rows > 0) 
         {
             // output data of each row
             while($row = $result->fetch_assoc()) 
             {
-                // make employee object
                 $emp = $this->makeEmployee($row["role"],$row["first_name"],$row["last_name"],$row["salary"],false,$row["staff_id"]);
-                // pus it to array
                 array_push($array_ret,$emp);
             }
         }
         
-        // return array to controller for later use
         return $array_ret;
     }
     
-    // Delete employee from database
     function DeleteDB($ID)
     {
         $sql = "DELETE FROM staff WHERE staff_id = '{$ID}'";
@@ -113,17 +99,14 @@ class EmployeeFactory
     }
 }
 
-// Base class for employees
 abstract class AbstractEmployee
 {
-    // Shared variables
     protected $id;
     protected $firstname;
     protected $lastname;
     protected $role;
     protected $salary;
     
-    // set some shared variables
     function __construct($ID,$fname,$lname) 
     {
         $this->id = $ID;
@@ -131,10 +114,8 @@ abstract class AbstractEmployee
         $this->lastname = $lname;
     }
     
-    //prototype function for overwriting
     protected abstract function calculateSalary();
     
-    // Get function for needed variables
     public function getID()
     {
         return $this->id;
@@ -157,10 +138,8 @@ abstract class AbstractEmployee
     }
 }
 
-// Derived classes from abstract class
 class Manager extends AbstractEmployee 
 {
-    // Add class specific values
     function __construct($ID,$fname,$lname,$salary) 
     {
         parent::__construct($ID,$fname,$lname);
@@ -168,8 +147,6 @@ class Manager extends AbstractEmployee
         $this->salary = $this->calculateSalary($salary);
     }
     
-    // Calcuate Salary, if it was not set previously
-    // Based on which class/role it is
     protected function calculateSalary($salary = 0)
     {
         if($salary == 0)
@@ -181,7 +158,6 @@ class Manager extends AbstractEmployee
 
 class SlopeOperator extends AbstractEmployee 
 {
-    // Add class specific values
     function __construct($ID,$fname,$lname,$salary) 
     {
         parent::__construct($ID,$fname,$lname);
@@ -189,8 +165,6 @@ class SlopeOperator extends AbstractEmployee
         $this->salary = $this->calculateSalary($salary);
     }
     
-    // Calcuate Salary, if it was not set previously
-    // Based on which class/role it is
     protected function calculateSalary($salary = 0)
     {
         if($salary == 0)
@@ -201,7 +175,6 @@ class SlopeOperator extends AbstractEmployee
 }
 class SkiInstructor extends AbstractEmployee 
 {
-    // Add class specific values
     function __construct($ID,$fname,$lname,$salary) 
     {
         parent::__construct($ID,$fname,$lname);
@@ -209,8 +182,6 @@ class SkiInstructor extends AbstractEmployee
         $this->salary = $this->calculateSalary($salary);
     }
     
-    // Calcuate Salary, if it was not set previously
-    // Based on which class/role it is
     protected function calculateSalary($salary = 0)
     {
         if($salary == 0)
@@ -221,7 +192,6 @@ class SkiInstructor extends AbstractEmployee
 }
 class Other extends AbstractEmployee 
 {
-    // Add class specific values
     function __construct($ID,$fname,$lname,$salary) 
     {
         parent::__construct($ID,$fname,$lname);
@@ -229,8 +199,6 @@ class Other extends AbstractEmployee
         $this->salary = $this->calculateSalary($salary);
     }
     
-    // Calcuate Salary, if it was not set previously
-    // Based on which class/role it is
     protected function calculateSalary($salary = 0)
     {
         if($salary == 0)

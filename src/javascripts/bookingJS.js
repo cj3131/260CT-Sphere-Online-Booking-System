@@ -1,42 +1,81 @@
-function makeBookingRequest()
+function makeRequest(rType,rSelect)
 {
-    var rData = getFormData();
-    alert("heel");
+    var rData = getFormData(rSelect);
+    
     $.ajax({        
-        type: 'POST',
-        url: 'registerPHP.php',
-        data: {"data": rData},
+        type: rType,
+        url: 'Staff_Controller.php',
+        data: {"selector": rSelect,"data": rData},
         dataType: 'json',      
         success: function(data)
         {
-           alert("It went ok");
+            if(rSelect == "empList")
+            {
+                for(var i in data)
+                {
+                    addTableEntry(data[i].staff_id,data[i].first_name,data[i].last_name,data[i].role,data[i].salary,"staff_table");
+                }
+            }
+            else if(rSelect == "selEmp")
+            {
+                for(var i in data)
+                {
+                    addTableEntry(data[i].staff_id,data[i].first_name,data[i].last_name,data[i].role,data[i].salary,"staff_table2");
+                }
+            }
         }
     });
 }
 
-function getFormData()
+function getFormData(rSelect)
 {
     var data = '{';
     var json_data;
     
- 
-    
-    data += '"first_name": "' + document.getElementById("first_name").value + '"';
-    data += ', "surname": "' + document.getElementById("Surname").value + '"';
-    data += ', "phoneNum": "' + document.getElementById("phoneNum").value + '"';
-    data += ', "email": "' + document.getElementById("email").value + '"';
-    data += ', "password": "' + document.getElementById("password").value + '"';
-    data += ', "DoB": "' + document.getElementById("DoB").value + '"';
-    data += ', "addLine1": "' + document.getElementById("addLine1").value + '"';
-    data += ', "addLine2": "' + document.getElementById("addLine2").value + '"';
-    data += ', "city": "' + document.getElementById("city").value + '"';
-    data += ', "county": "' + document.getElementById("county").value + '"';
-    data += ', "postcode": "' + document.getElementById("postcode").value + '"';
-    
+    if(rSelect == "delEmp" || rSelect == "selEmp")
+    {
+        data += '"ID": "' + document.getElementById("ID").value + '"';
+    }
+    else if(rSelect == "addEmp")
+    {
+        data += '"Fname": "' + document.getElementById("Fname").value + '"';
+        data += ', "Lname": "' + document.getElementById("Lname").value + '"';
+        data += ', "Role": "' + document.getElementById("Role").value + '"';
+        data += ', "Salary": "' + document.getElementById("Salary").value + '"';
+    }
     
     data += '}';
     
     json_data = JSON.parse(data);
     
     return json_data;
+}
+
+function addTableEntry(id,fname,lname,role,salary,tableID)
+{
+    var table = document.getElementById(tableID);
+    var row = table.insertRow(table.rows.length);
+    
+    for(i = 0; i < 5; i++)
+    {
+        var tmpCell = row.insertCell(i)
+        switch(i)
+        {
+            case 0:
+                tmpCell.innerHTML = id;
+                break;
+            case 1:
+                tmpCell.innerHTML = fname;
+                break;
+            case 2:
+                tmpCell.innerHTML = lname;
+                break;
+            case 3:
+                tmpCell.innerHTML = role;
+                break;
+            case 4:
+                tmpCell.innerHTML = salary;
+                break;
+        } 
+    }
 }
