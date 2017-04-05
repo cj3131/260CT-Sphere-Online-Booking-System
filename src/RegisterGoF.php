@@ -1,62 +1,24 @@
 <?php
-
 class UserFactory { 
 
     private $conn = 0;
-    
-    function __construct()
+
+    function __construct($param)
+        //when a new object is created
     {
-        $this->ConnectDB();
-    }
-    function __destruct()
-    {
-        $this->DisconnectDB();
-    }
-    
-    private function ConnectDB()
-    {
-
-        // Connection details
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "sphere5_db";
-
-        // Create connection
-        $this->conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
-        }
-    }
-    private function DisconnectDB()
-    {
-        $this->conn->close();
-    }
-
-    function AddUser($firstname,$surname,$email,$phonenumber,$dob,$customer_address_one,$customer_address_two,$city,$county,$postcode,$password){
-        
-       
-            $sql = "INSERT INTO members (first_name, last_name, email, phone_number, dob, address_one, address_two, city, country, postcode, password)
-            VALUES ('{$firstname}','{$surname}','{$email}','{$phonenumber}','{$dob}','{$customer_address_one}','{$customer_address_two}','{$city}',
-            '{$county}','{$postcode}','{$password}')";
-
-            if ($this->conn->query($sql) === FALSE) 
-            {
-                echo "Error: " . $sql . "<br>" . $this->conn->error;
-            }
-
-       
-        $user = NULL;   
+        $user = NULL;
+        //saves it to the different types of users
         switch ($param) {
             case "free":
-                $user = new FreeUserMember;
+                $user = new FreeUserMember();
+                //Add a new free member
                 break;
             case "loyalty":
-                $user = new LoyaltyMember;
+                $user = new LoyaltyMember();
+                //Add a new loyalty member
                 break;
             default:
-                $user = new FreeUserMember;
+                $user = new FreeUserMember();
                 break;        
         }     
         return $user;
@@ -65,72 +27,144 @@ class UserFactory {
 
 abstract class AbstractUser {
 
-    protected $firstname;
-    protected $surname;
-    protected $email;
-    protected $phonenumber;
-    protected $dob;
-    protected $password;
-    protected $customerAdd1;
-    protected $customerAdd2;
-    protected $city;
-    protected $county;
-    protected $postcode;
-    protected $discount;
-    protected $fee;
-
-    function __construct($firstname,$surname,$email,$phonenumber,$dob,$password,$customerAdd1,$customerAdd2,$city,$county,$postcode) {
-
-        $this->firstname = $firstname;
-        $this->surname = $surname;
-        $this->email = $email;
-        $this->phonenumber = $phonenumber;
-        $this->dob = $dob;
-        $this->password = $password;
-        $this->customerAdd1 = $customerAdd1;
-        $this->customerAdd2 = $customerAdd2;
-        $this->city = $city;
-        $this->county = $county;
-        $this->postcode = $postcode;
-
+    private $firstname;
+    private $surname;
+    private $email;
+    private $phonenumber;
+    private $dob;
+    private $password;
+    private $customerAdd1;
+    private $customerAdd2;
+    private $city;
+    private $county;
+    private $postcode;
+    //Variables in the user class that are Inherited by children 
+    
+    //Get and set functions for each input
+    public getFirstName(){
+        return($firstName);
+    }
+    
+    public getLastName(){
+        return($lastName);
+    }
+    
+    public getEmail(){
+        return($email);
+    }
+    
+    public getPhoneNumber(){
+        return($phoneNumber);
+    }
+    
+    public getDoB(){
+        return($dob);
     }
 
+    public getPassword(){
+        return($password);
+    }
+    
+    public getAddLine1(){
+        return($AddLine1);
+    }
+    
+    public getAddLine2(){
+        return($AddLine2);
+    }
+    
+    public getCity(){
+        return($city);
+    }
+    
+    public getCounty(){
+        return($county);
+    }
+    
+    public getPostcode(){
+        return($postcode);
+    }
+    
+    public setFirstName($aFirstName){
+        $firstname = $aFirstName;
+    }
+    
+    public setLastName($aLastName){
+        $lastName = $aLastName;
+    }
+    
+    public setEmail($aEmail){
+        $email = $aEmail;
+    }
+    
+    public setDoB($aDate){
+        $dob = $aDate;
+    }
+    
+    public setAddLine1($aAddLine1){
+        $AddLine1 = $aAddLine1;
+    }
+    
+    public setAddLine2($aAddLine2){
+        $AddLine2 = $aAddLine2;
+    }
+    
+    public setCity($aCity){
+        $city = $aCity;
+    }
+    
+    public setCounty($aCounty){
+        $county = $aCounty;
+    }
+    
+    public setPostcode($aPostcode){
+        $postcode = $aPostcode;
+    }
+  
 }
 
 
 class FreeUserMember extends AbstractUser {
-
-    function __construct($firstname,$surname,$email,$phonenumber,$dob,$password,$customerAdd1,$customerAdd2,$city,$county,$postcode) 
-    {
-        parent::__construct($ID,$fname,$lname);
-
-        $this->discount = $this->CalcFreeMemberDiscount();
-        $this->fee = $this->CalcFreeMemberFee();
+    //Inherits all of AbstractUsers varaiabla and functions
+    private $discount;
+    private $fee;
+    
+    public setFee(){
+        $fee = 0;
     }
 
-    function CalcFreeMemberFee(){
-        return(0.00);
+    public setDiscount(){
+        $discount = 0;
     }
-    function CalcFreeMemberDiscount() {
-        return(0.00);
+    
+    public getFee(){
+        return $fee;
+    }
+    
+    public getDiscount(){
+        return $discount;
     }
 }
 
 class LoyaltyMember extends AbstractUser {
+    //Inherits all of AbstractUsers varaiabla and functions
+    private $discount;
+    private $fee;
 
-    function __construct($firstname,$surname,$email,$phonenumber,$dob,$password,$customerAdd1,$customerAdd2,$city,$county,$postcode) 
-    {
-        parent::__construct($ID,$fname,$lname);
-
-        $this->discount = $this->CalcLoyaltyMemberDiscount();
-        $this->fee = $this->CalcLoyaltyMemberFee();
+    public setFee(){
+        $fee = 20
     }
 
-    function CalcLoyaltyMemberFee(){
-        return(0.00);
+    public setDiscount(){
+        $discount = 2;
     }
-    function CalcLoyaltyMemberDiscount(){
-        return(0.00);
+    
+    public getFee(){
+        return $fee;
+    }
+    
+    public getDiscount(){
+        return $discount;
     }
 }
 ?>
