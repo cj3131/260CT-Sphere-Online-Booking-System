@@ -8,7 +8,6 @@ class emp_controller
 {
     // --- VARIABLES ---
     
-    private $conn = 0;
     private $empFactory = 0;
     private $employeeList = 0;
     
