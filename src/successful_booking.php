@@ -1,4 +1,10 @@
 <?php
+class booking_controller
+{
+    
+    
+}
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -11,7 +17,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-
 $date = $_POST["date"];
 $starttime = $_POST["starttime"];
 $endtime = $_POST["endtime"];
@@ -22,8 +27,6 @@ $comments = $_POST["comments"];
 $equipment = $_POST["equipment"];
 $instructor = $_POST["instructor"];
 $total_attendees = "";
-
-
 
 //select the session with given date/time, if it exists
 $sql = "SELECT * FROM sessions WHERE date = '{$date}' AND starttime = '{$starttime}' AND endtime = '{$endtime}'";
