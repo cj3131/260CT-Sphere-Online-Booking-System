@@ -18,19 +18,23 @@ function makeRequest(rType,rSelect)
 {
     var rData = getFormData(rSelect);
     
-    $.ajax({        
+    $.ajax({ // special JavaScript function to make requests to PHP 
         type: rType, // what type of request POST or GET
-        url: 'Staff_Controller.php', 
+        url: 'Staff_Controller.php', // Request destination
         data: {"selector": rSelect,"data": rData}, // Data to pass to the php file
         dataType: 'json', // what kind of data to expect to get back 
-        success: function(data)
+        success: function(data) // perform these actions on successful request
         {
             // To Display employeeList it adds table entry to html page
             if(rSelect == "empList")
             {
                 for(var i in data)
                 {
-                    addTableEntry(data[i].staff_id,data[i].first_name,data[i].last_name,data[i].role,data[i].salary,"staff_table");
+                    addTableEntry(data[i].staff_id,
+                                  data[i].first_name,
+                                  data[i].last_name,
+                                  data[i].role,data[i].salary,
+                                  "staff_table");
                 }
             }
             // Add single entry for Deletion form
@@ -38,7 +42,11 @@ function makeRequest(rType,rSelect)
             {
                 for(var i in data)
                 {
-                    addTableEntry(data[i].staff_id,data[i].first_name,data[i].last_name,data[i].role,data[i].salary,"staff_table2");
+                    addTableEntry(data[i].staff_id,
+                                  data[i].first_name,
+                                  data[i].last_name,
+                                  data[i].role,data[i].salary,
+                                  "staff_table2");
                 }
             }
         }

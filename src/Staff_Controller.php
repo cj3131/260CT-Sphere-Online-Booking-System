@@ -4,13 +4,13 @@
 require("Staff_Entities.php");
 
 // Employee Controller
-class emp_controller
+abstract class emp_controller
 {
     // --- VARIABLES ---
-    
-    private $empFactory = 0;
-    private $employeeList = 0;
-    
+
+    protected $empFactory = 0;
+    protected $employeeList = 0;
+
     // --- CONSTRUCTOR ---
     // Prepares Employee factory for work
     function __construct()
@@ -18,39 +18,21 @@ class emp_controller
         $this->empFactory = new EmployeeFactory();
         $this->employeeList = $this->empFactory->getAllEmployees();
     }
-    
-    // --- Handler ---
-    // Handles different types of actions to execute
-    public function requestHandler()
+}
+
+class DisplayEmpCont extends emp_controller
+{
+    // Making sure that parent class construct is called
+    function __construct()
     {
-        if($_GET["selector"] == "empList")
-        {
-            $this->display();
-        }
-        
-        if($_GET["selector"] == "selEmp")
-        {
-            $this->select();
-        }
-        
-        if($_POST["selector"] == "delEmp")
-        {
-            $this->DeleteDB();
-        }
-        
-        if($_POST["selector"] == "addEmp")
-        {
-            $this->InsertDB();
-        }  
+        parent::__construct();
     }
-     
-    // --- PRIVATE ---
-    
+
     // Display function
     // Gets all current employees
     // Encodes from objects to JSON type file
     // Sends it back to Javascript fuction which originaly called this PHP
-    private function display()
+    public function display()
     {       
         $array_ret = Array();     
         foreach($this->employeeList as $obj)
@@ -64,10 +46,10 @@ class emp_controller
         }
         echo json_encode($array_ret);
     }
-    
+
     // Get single employee,
     // Acts very similarly to Display
-    private function select()
+    public function select()
     {
         $ID = $_GET["data"]["ID"];
         $array_ret = Array();
@@ -84,21 +66,30 @@ class emp_controller
             }
         }
         echo json_encode($array_ret);
+    }    
+}
+
+class AddEmpCont extends emp_controller
+{
+    // Making sure that parent class construct is called
+    function __construct()
+    {
+        parent::__construct();
     }
-    
+
     // Inserts new employee to database
-    private function insertDB() 
+    public function insertDB() 
     {
         // unpack the data from POST request
         $pData = $_POST["data"];
-        
+
         $firstname = $pData["Fname"];
         $lastname = $pData["Lname"];
         $role = $pData["Role"];
         $salary = $pData["Salary"];
-        
+
         $inList = false;
-        
+
         // Check if the employee exists
         foreach($this->employeeList as $obj)
         {
@@ -107,16 +98,25 @@ class emp_controller
                 $inList = true;
             }
         }
-        
+
         // If it doesn't exist, add it
         if ($inList == false)
         {
             $this->empFactory->makeEmployee($role,$firstname,$lastname,$salary,true,NULL);
         }
     }
-    
+}
+
+class DelEmpCont extends emp_controller
+{
+    // Making sure that parent class construct is called
+    function __construct()
+    {
+        parent::__construct();
+    }
+
     // Delete Employee 
-    private function DeleteDB()
+    public function DeleteDB()
     {
         $ID = $_POST["data"]["ID"];
         foreach($this->employeeList as $key => $obj)
@@ -131,13 +131,42 @@ class emp_controller
 
 // Check if POST and GET came with set selector value
 // To prevent outside access to operations
+// POST and GET contain data which is sent from outside
 if(isset($_GET["selector"]) or isset($_POST["selector"]))
 {
-    $cont = new emp_controller();
-    $cont->requestHandler();
+    // If values are set proceed to identify what kind of request was sent
+    requestHandler();
 }
-else
+
+// --- Handler ---
+// Handles different types of actions to execute
+function requestHandler()
 {
-    echo "Not POST or GET, bugger off";
+    // Based on variable selector goes appropriate controller
+    $cont = 0;
+    
+    if($_GET["selector"] == "empList")
+    {
+        $cont = new DisplayEmpCont();
+        $cont->display();
+    }
+
+    if($_GET["selector"] == "selEmp")
+    {
+        $cont = new DisplayEmpCont();
+        $cont->select();
+    }
+
+    if($_POST["selector"] == "delEmp")
+    {
+        $cont = new DelEmpCont();
+        $cont->DeleteDB();
+    }
+
+    if($_POST["selector"] == "addEmp")
+    {
+        $cont = new AddEmpCont();
+        $cont->InsertDB();
+    }  
 }
 ?>

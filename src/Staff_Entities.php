@@ -37,7 +37,7 @@ class EmployeeFactory
     // --- Public functions ---
     
     // Saves data to Database and creates, equivalent Employee object for later use
-    function makeEmployee($type, $fname, $lname, $salary, $dbSave = false, $ID = NULL) 
+    public function makeEmployee($type, $fname, $lname, $salary, $dbSave = false, $ID = NULL) 
     {
         $employee = 0;
         // There are 2 options:
@@ -78,7 +78,7 @@ class EmployeeFactory
     
     // Bulk creation of all employees
     // Multiple calls of makeEmployee
-    function getAllEmployees()
+    public function getAllEmployees()
     {
         // get all data from database
         $sql = "SELECT * FROM staff";
